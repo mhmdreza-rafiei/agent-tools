@@ -3,9 +3,26 @@
 Thumbs.db
 desktop.ini
 
-# Editors
+# Editors / IDEs
 .vscode/
 .idea/
+.zed/
+.zcode/
+.fleet/
+
+# Agent / coding-assistant local config (not part of the catalog)
+.cursor/
+.claude/
+.agents/
+.windsurf/
+.continue/
+.aider/
+.codeium/
+.tabnine/
+.copilot/
+.gemini/
+.opencode/
+.codex/
 
 # Node (if tooling is added later)
 node_modules/
