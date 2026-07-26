@@ -1,5 +1,5 @@
 name: frontend
-description: Frontend-focused team — UI, UX, React, Next.js, and the foundational frontend developer.
+description: Frontend-focused team - UI, UX, React, Next.js, the foundational frontend developer, plus the a11y auditor and audit skill.
 author: mhmdreza_rafiei
 scope: project
 targets:
@@ -13,8 +13,14 @@ artifacts:
     - id: frontend/ux-designer
     - id: frontend/react-pro
     - id: frontend/nextjs-pro
+    - id: qa/accessibility-auditor
   skills:
     - id: enhance-prompt
+    - id: audit/a11y
+    - id: workflow/scaffold
   rules:
     - id: ask-dont-guess
     - id: files-folders-structure
+    - id: code/code-style
+    - id: code/accessibility
+    - id: code/performance

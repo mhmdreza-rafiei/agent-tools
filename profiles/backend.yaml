@@ -1,5 +1,5 @@
 name: backend
-description: Backend-focused team — architecture, full-stack, GraphQL, and database specialists.
+description: Backend-focused team - architecture, full-stack, GraphQL, realtime, schema design, and database specialists, with API and security rules.
 author: mhmdreza_rafiei
 scope: project
 targets:
@@ -11,9 +11,20 @@ artifacts:
     - id: backend/backend-architect
     - id: backend/full-stack-developer
     - id: backend/graphql-architect
+    - id: backend/realtime-engineer
     - id: data/database-optimizer
     - id: data/postgres-pro
+    - id: data/schema-architect
+    - id: languages/cli-engineer
+    - id: qa/api-reviewer
+  skills:
+    - id: enhance-prompt
+    - id: workflow/spec
   rules:
     - id: ask-dont-guess
     - id: migration
     - id: git-workflow
+    - id: api-design
+    - id: security
+    - id: code/error-handling
+    - id: observability

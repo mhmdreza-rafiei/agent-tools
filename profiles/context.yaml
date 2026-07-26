@@ -1,5 +1,5 @@
 name: context
-description: The full context-system suite — all 8 context skills for project setup, planning, review, memory, and recovery.
+description: The full context-system suite - all 10 context skills (groundwork, architect, review, validate, remember, recover, imprint, run-team, postmortem, cleanup) plus the workflow skills for spec, estimate, and triage.
 author: mhmdreza_rafiei
 scope: project
 targets:
@@ -16,5 +16,11 @@ artifacts:
     - id: context/recover
     - id: context/imprint
     - id: context/run-team
+    - id: context/postmortem
+    - id: context/cleanup
+    - id: workflow/spec
+    - id: workflow/estimate
+    - id: workflow/triage
   rules:
     - id: project-context
+    - id: ask-dont-guess

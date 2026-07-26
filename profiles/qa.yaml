@@ -1,0 +1,25 @@
+name: qa
+description: Quality Assurance team - code review, architecture review, API review, accessibility audit, debugging, test automation, and QA expertise, with testing and error-handling rules.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  agents:
+    - id: qa/code-reviewer
+    - id: qa/architect-review
+    - id: qa/api-reviewer
+    - id: qa/accessibility-auditor
+    - id: qa/debugger
+    - id: qa/qa-expert
+    - id: qa/test-automator
+  skills:
+    - id: enhance-prompt
+    - id: audit/a11y
+  rules:
+    - id: git-workflow
+    - id: code/testing
+    - id: code/error-handling
+    - id: code/accessibility

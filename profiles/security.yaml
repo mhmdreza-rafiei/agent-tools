@@ -1,5 +1,5 @@
 name: security
-description: Security review team — security auditor plus code and architecture reviewers.
+description: Security review team - security auditor plus code, architecture, and API reviewers, with security and error-handling rules.
 author: mhmdreza_rafiei
 scope: project
 targets:
@@ -11,5 +11,8 @@ artifacts:
     - id: security-auditor
     - id: qa/code-reviewer
     - id: qa/architect-review
+    - id: qa/api-reviewer
   rules:
     - id: git-workflow
+    - id: security
+    - id: code/error-handling

@@ -1,5 +1,5 @@
 name: devops
-description: DevOps team — cloud architecture, deployment, performance, and incident response.
+description: DevOps team - cloud architecture, deployment, performance, observability, cost, and incident response, with release and postmortem skills.
 author: mhmdreza_rafiei
 scope: project
 targets:
@@ -11,8 +11,16 @@ artifacts:
     - id: devops/cloud-architect
     - id: devops/deployment-engineer
     - id: devops/performance-engineer
+    - id: devops/observability-engineer
+    - id: devops/cost-optimizer
     - id: devops/incident-responder
     - id: devops/devops-incident-responder
+  skills:
+    - id: enhance-prompt
+    - id: workflow/release
+    - id: context/postmortem
   rules:
     - id: git-workflow
     - id: ask-dont-guess
+    - id: observability
+    - id: code/performance
