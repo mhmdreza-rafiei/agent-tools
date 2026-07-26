@@ -20,6 +20,7 @@ artifacts:
     - id: audit/a11y
   rules:
     - id: git-workflow
+    - id: ai-attribution
     - id: code/testing
     - id: code/error-handling
     - id: code/accessibility

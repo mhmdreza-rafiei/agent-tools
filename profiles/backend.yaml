@@ -24,6 +24,7 @@ artifacts:
     - id: ask-dont-guess
     - id: migration
     - id: git-workflow
+    - id: ai-attribution
     - id: api-design
     - id: security
     - id: code/error-handling

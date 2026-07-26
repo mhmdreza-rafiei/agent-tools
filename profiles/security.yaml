@@ -14,5 +14,6 @@ artifacts:
     - id: qa/api-reviewer
   rules:
     - id: git-workflow
+    - id: ai-attribution
     - id: security
     - id: code/error-handling

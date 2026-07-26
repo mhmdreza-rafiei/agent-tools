@@ -24,3 +24,4 @@ artifacts:
   rules:
     - id: project-context
     - id: ask-dont-guess
+    - id: ai-attribution

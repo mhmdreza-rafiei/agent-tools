@@ -1,0 +1,87 @@
+---
+description: Explain AI git co-authorship (Cursor/etc.), prevent it, and remove it safely
+alwaysApply: true
+author: mhmdreza_rafiei
+---
+
+# AI git attribution (Cursor and other agents)
+
+## What "AI contribute" means
+
+Some tools add machine authorship to commits so GitHub can show an AI as a contributor:
+
+1. **Trailer** (most common): a blank line, then something like:
+   - `Co-authored-by: Cursor <...>`
+   - `Co-authored-by: Claude <...>`
+   - `Co-authored-by: GitHub Copilot <...>`
+2. **Author / committer identity**: `Author:` or `Committer:` set to an agent name/email (e.g. Cursor Agent) instead of the human.
+
+Trailers live in the **commit message**. Changing only future commits does not rewrite old history. GitHub's Contributors list can lag after a rewrite.
+
+## Default policy
+
+- Prefer **human-only** authorship unless the user explicitly wants AI co-author trailers.
+- Never add `Co-authored-by:` for Cursor, Claude, Copilot, or other agents unless asked.
+- Never rewrite git history, force-push, or amend published commits unless the user explicitly asks and understands the risk.
+- Before any history rewrite: full backup of `.git` (or a clearly named sibling backup), then confirm backup exists.
+
+## Prevent (do this first)
+
+1. **Cursor**: Settings -> Agents -> **Attribution** -> turn **off** (stops new Cursor co-author injection).
+2. Optional local guard -- `.git/hooks/prepare-commit-msg` (strip known AI trailers on every commit):
+
+```bash
+#!/bin/sh
+MSG_FILE=$1
+# Drop AI co-author lines (extend patterns as needed)
+sed -i.bak -E '/^Co-authored-by:.*(Cursor|Claude|Copilot|ChatGPT|Gemini|Codex).*/Id' "$MSG_FILE"
+rm -f "${MSG_FILE}.bak"
+```
+
+On Windows Git Bash, `sed -i` works; for PowerShell-only setups, use a small Node/Python stripper instead. Make the hook executable (`chmod +x` on Unix).
+
+3. Confirm `git config user.name` / `user.email` are the human's (do **not** change `git config` unless the user asks).
+
+## Detect
+
+```bash
+# Trailers in reachable history
+git log --all --grep='Co-authored-by:' -i
+# Agent as author/committer
+git log --all --format='%H %an <%ae> | %cn <%ce> | %s' | grep -iE 'cursor|claude|copilot|chatgpt|gemini|codex'
+```
+
+Also check the latest message: `git log -1 --format=full`
+
+## Remove -- future commits only (safe)
+
+- Turn Attribution off + install the hook above.
+- For the **next** commit only: edit the message and delete AI `Co-authored-by:` lines (or `git commit --amend` **only** if that commit is yours, unpushed, and the user asked to amend).
+
+## Remove -- already in history (destructive; ask first)
+
+Only when the user explicitly wants AI names off GitHub Contributors / blame:
+
+1. Backup: copy `.git` -> e.g. `../.git-backup-<repo>-<timestamp>`
+2. Prefer a **filter** that:
+   - Strips matching `Co-authored-by:` lines from messages
+   - Rewrites author/committer when they match known agent identities to the human `Name <email>`
+3. Tools: `git filter-repo` (preferred) or carefully scripted `git filter-branch` / `commit-tree` rewrites. Avoid interactive rebase for large histories.
+4. Force-push only if the user explicitly requests it; warn if the branch is `main`/`master` or shared.
+5. Tell the user: GitHub Contributors may still show the AI until cache refreshes (hours to days). Old clones keep poisoned history until they re-clone or hard-reset to the new tip.
+
+## Explain to the user (short)
+
+When asked "what is Cursor contribute?":
+
+> Cursor can append a `Co-authored-by: Cursor ...` trailer (and sometimes set author metadata) so GitHub credits the agent. It is optional attribution, not a separate GitHub account login. Turn it off in Settings -> Agents -> Attribution; strip trailers from messages to remove credit; rewriting history is required only for past commits already pushed.
+
+## Portable checklist (any AI)
+
+| Goal | Action |
+|------|--------|
+| Stop new attribution | Disable product "attribution / co-author" setting |
+| Stop local reinjection | `prepare-commit-msg` hook stripping `Co-authored-by:` |
+| Clean last local commit | Amend message (if allowed) or soft-reset and recommit |
+| Clean published history | Backup -> filter -> force-push (explicit permission) |
+| Verify | `git log --grep=Co-authored-by` returns nothing you care about |

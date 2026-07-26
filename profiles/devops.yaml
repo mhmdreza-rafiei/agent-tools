@@ -21,6 +21,7 @@ artifacts:
     - id: context/postmortem
   rules:
     - id: git-workflow
+    - id: ai-attribution
     - id: ask-dont-guess
     - id: observability
     - id: code/performance

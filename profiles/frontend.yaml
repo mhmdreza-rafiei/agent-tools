@@ -21,6 +21,7 @@ artifacts:
   rules:
     - id: ask-dont-guess
     - id: files-folders-structure
+    - id: ai-attribution
     - id: code/code-style
     - id: code/accessibility
     - id: code/performance

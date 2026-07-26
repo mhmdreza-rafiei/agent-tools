@@ -21,6 +21,7 @@ artifacts:
     - id: ask-dont-guess
     - id: files-folders-structure
     - id: git-workflow
+    - id: ai-attribution
     - id: code/code-style
     - id: code/testing
     - id: code/error-handling

@@ -19,4 +19,5 @@ artifacts:
   rules:
     - id: ask-dont-guess
     - id: git-workflow
+    - id: ai-attribution
     - id: prompt-quality
