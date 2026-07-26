@@ -13,7 +13,7 @@ the catalog, see [README.md](README.md).
 agent-tools/
 ├── agents/      ← one .mdc file per agent, flat or one category deep
 ├── skills/      ← one folder per skill, with SKILL.md (+ optional references/)
-├── rules/       ← one .mdc file per rule
+├── rules/       ← one .mdc file per rule, flat or one category deep (global/, code/)
 ├── profiles/    ← one .yaml file per install bundle
 ├── scripts/     ← one folder per use-case, with README.md + runnable files
 └── docs/        ← repo docs (proposals, etc.)
@@ -131,8 +131,11 @@ artifacts by `id`; scripts are folders with a `README.md` + runnable file.
 - **agents/** — `frontend/`, `backend/`, `languages/`, `devops/`, `data/`,
   `ai/`, `qa/`, `docs/`, `dx/` + flat singletons `security-auditor`,
   `product-manager`, `agent-organizer`.
-- **skills/** — `context/` (the 8 context-system skills) + flat `enhance-prompt`.
-- **rules/** — flat (small cohesive set of workflow rules).
+- **skills/** — `context/` (10 context-system skills), `workflow/` (spec,
+  estimate, triage, release, scaffold), `audit/` (a11y) + flat `enhance-prompt`.
+- **rules/** — `global/` (5 always-on workflow rules), `code/` (code-style,
+  testing, error-handling, performance, accessibility) + flat domain rules
+  (`security`, `api-design`, `observability`, `prompt-quality`).
 
 ## License
 
@@ -141,9 +144,10 @@ catalog. Author for all artifacts: `mhmdreza_rafiei`.
 
 ## When working on this repo
 
-- Follow the user rules in `.cursor/rules/` (ask-dont-guess, files-folders-structure,
-  git-workflow, migration, project-context).
+- Follow the user rules (ask-dont-guess, files-folders-structure, git-workflow,
+  migration, project-context) — they live in the Cursor rules config, not in
+  this repo. The `rules/global/` folder is the catalog's installable copy.
 - Conventional Commits only; ask before pushing.
 - For renames/moves: use `git mv`, update references, verify, then remove old.
-- Run `node scripts/lint-artifacts/run.mjs` before committing to catch
-  frontmatter or extension drift.
+- Run `node scripts/lint-artifacts/run.mjs` and `node scripts/check-compat/run.mjs`
+  before committing to catch frontmatter, extension, or compatibility drift.

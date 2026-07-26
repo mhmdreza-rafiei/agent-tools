@@ -8,10 +8,10 @@ Works with Cursor, Claude Code, Codex, OpenCode, and 70+ more.
 [![license](https://img.shields.io/badge/license-MIT-38bdf8?style=flat)](LICENSE)
 [![stars](https://img.shields.io/github/stars/mhmdreza-rafiei/agent-tools?style=social)](https://github.com/mhmdreza-rafiei/agent-tools)
 [![agentry](https://img.shields.io/badge/agentry-compatible-38bdf8?style=flat)](https://github.com/mhmdreza-rafiei/agentry)
-[![agents](https://img.shields.io/badge/agents-37-38bdf8?style=flat)](agents)
-[![skills](https://img.shields.io/badge/skills-9-38bdf8?style=flat)](skills)
-[![rules](https://img.shields.io/badge/rules-5-38bdf8?style=flat)](rules)
-[![profiles](https://img.shields.io/badge/profiles-8-38bdf8?style=flat)](profiles)
+[![agents](https://img.shields.io/badge/agents-46-38bdf8?style=flat)](agents)
+[![skills](https://img.shields.io/badge/skills-17-38bdf8?style=flat)](skills)
+[![rules](https://img.shields.io/badge/rules-14-38bdf8?style=flat)](rules)
+[![profiles](https://img.shields.io/badge/profiles-9-38bdf8?style=flat)](profiles)
 
 ## Install
 
@@ -41,10 +41,10 @@ agentry list
 
 ## What's in the catalog
 
-**62 artifacts** — 37 agents, 9 skills, 5 rules, 8 profiles, 3 scripts.
+**97 artifacts** — 46 agents, 17 skills, 14 rules, 9 profiles, 11 scripts.
 Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 
-### Agents (37)
+### Agents (46)
 
 | Category | Agent | Use for |
 |----------|-------|---------|
@@ -56,25 +56,33 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `backend/` | `backend-architect` | REST APIs, microservices, database schemas |
 | `backend/` | `full-stack-developer` | End-to-end web apps, frontend + backend |
 | `backend/` | `graphql-architect` | GraphQL schemas, resolvers, federation |
+| `backend/` | `realtime-engineer` | WebSockets, SSE, pub/sub, event-driven systems |
 | `languages/` | `python-pro` | Django, FastAPI, async Python, data processing |
 | `languages/` | `golang-pro` | Concurrent Go, microservices, CLI tools |
 | `languages/` | `typescript-pro` | Type-safe TS, advanced types, scalable architecture |
 | `languages/` | `mobile-developer` | React Native / Flutter, native integrations |
 | `languages/` | `electron-pro` | Cross-platform desktop apps, IPC, native integration |
+| `languages/` | `cli-engineer` | CLI design: flags, help text, completion, distribution |
 | `devops/` | `cloud-architect` | AWS/Azure/GCP, cost optimization, cloud-native |
 | `devops/` | `deployment-engineer` | CI/CD, Docker, Kubernetes, infra automation |
 | `devops/` | `performance-engineer` | Bottleneck analysis, caching, perf monitoring |
+| `devops/` | `observability-engineer` | OpenTelemetry, Prometheus, Grafana, SLOs |
+| `devops/` | `cost-optimizer` | FinOps: idle resources, right-sizing, reservation strategy |
 | `devops/` | `devops-incident-responder` | Log analysis, deployment troubleshooting |
 | `devops/` | `incident-responder` | Critical outages, crisis management, postmortems |
 | `data/` | `data-engineer` | ETL, data warehouses, streaming, Spark/Airflow/Kafka |
 | `data/` | `data-scientist` | SQL, BigQuery, statistical analysis, BI |
 | `data/` | `database-optimizer` | Query optimization, indexing, schema design |
 | `data/` | `postgres-pro` | PostgreSQL advanced queries, tuning, pglite |
+| `data/` | `schema-architect` | Schema design, normalization, indexing strategy, migrations |
 | `ai/` | `ai-engineer` | RAG, prompt pipelines, AI API integration |
 | `ai/` | `ml-engineer` | ML pipelines, model serving, production ML |
 | `ai/` | `prompt-engineer` | LLM optimization, prompt engineering |
+| `ai/` | `prompt-architect` | Prompt and agent-instruction architecture, sections, passes |
 | `qa/` | `code-reviewer` | Code review: best practices, security, maintainability |
 | `qa/` | `architect-review` | Architectural consistency, pattern compliance |
+| `qa/` | `api-reviewer` | API contract review: versioning, pagination, error shape |
+| `qa/` | `accessibility-auditor` | WCAG, ARIA, keyboard nav, contrast audits |
 | `qa/` | `debugger` | Error analysis, root cause, test failure investigation |
 | `qa/` | `qa-expert` | Testing strategies, quality processes |
 | `qa/` | `test-automator` | Unit/integration/E2E test suites, automation infra |
@@ -82,54 +90,81 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `docs/` | `documentation-expert` | User manuals, system docs, knowledge bases |
 | `dx/` | `dx-optimizer` | Tooling, build systems, dev workflows |
 | `dx/` | `legacy-modernizer` | Legacy refactors, framework migrations |
+| `dx/` | `codebase-onboarder` | Walk new contributors through the architecture |
 | (flat) | `security-auditor` | Vulnerability assessments, OWASP, pen testing |
 | (flat) | `product-manager` | Roadmaps, market analysis, business alignment |
 | (flat) | `agent-organizer` | Multi-agent team assembly, delegation strategy |
 
-### Skills (9)
+### Skills (17)
 
 | Category | Skill | Use for |
 |----------|-------|---------|
 | `context/` | `groundwork` | Scaffold + maintain the `context/` system + AGENTS.md |
-| `context/` | `architect` | Senior-engineer thinking pass → `context/plan.md` |
+| `context/` | `architect` | Senior-engineer thinking pass -> `context/plan.md` |
 | `context/` | `review` | Three-layer check (plan/system/production) |
 | `context/` | `validate` | Quality-bar check against comparable projects |
 | `context/` | `remember` | Save/restore session state to `context/memory/progress.md` |
-| `context/` | `recover` | Diagnose failure type → targeted fix / reset / rethink |
+| `context/` | `recover` | Diagnose failure type -> targeted fix / reset / rethink |
 | `context/` | `imprint` | Record UI patterns to `context/memory/ui-registry.md` |
 | `context/` | `run-team` | Start / resume / clear an agent team |
+| `context/` | `postmortem` | Write a postmortem from an incident timeline + factors |
+| `context/` | `cleanup` | Focused tech-debt pass: dead code, dup helpers, stale deps |
+| `workflow/` | `spec` | Write the spec/PRD that precedes planning |
+| `workflow/` | `estimate` | Size work before commitment; flag risky/large work |
+| `workflow/` | `triage` | Sort an issue/bug list by severity + root-cause guess |
+| `workflow/` | `release` | Cut a release: changelog gen, version bump, tag, notes |
+| `workflow/` | `scaffold` | Scaffold a new feature with tests + types + docs stub |
+| `audit/` | `a11y` | Accessibility audit: axe, keyboard, contrast, motion |
 | (flat) | `enhance-prompt` | Rewrite vague chat into precise, portable agent prompts |
 
-### Rules (5)
+### Rules (14)
 
 | Rule | Always apply | Use for |
 |------|--------------|---------|
-| `ask-dont-guess` | yes | Ask when unclear; never guess requirements |
-| `files-folders-structure` | yes | Folder/file naming and grouping conventions |
-| `git-workflow` | yes | Conventional Commits, backups, commit/push permission |
-| `migration` | yes | Safe refactors: moves, renames, splits, ref updates |
-| `project-context` | yes | Read and update project context after every task |
+| `global/ask-dont-guess` | yes | Ask when unclear; never guess requirements |
+| `global/files-folders-structure` | yes | Folder/file naming and grouping conventions |
+| `global/git-workflow` | yes | Conventional Commits, backups, commit/push permission |
+| `global/migration` | yes | Safe refactors: moves, renames, splits, ref updates |
+| `global/project-context` | yes | Read and update project context after every task |
+| `code/code-style` | no | In-code style: formatting, naming, structure |
+| `code/testing` | no | Testing bar: what must be tested, coverage floors |
+| `code/error-handling` | no | Forbid silent catches; require typed errors + logging |
+| `code/performance` | no | Performance budgets: TBT, LCP, p95 latency |
+| `code/accessibility` | no | A11y requirements: WCAG level, ARIA, keyboard |
+| `security` | no | Security: input validation, secret handling, auth |
+| `api-design` | no | API design standards: versioning, pagination, error shape |
+| `observability` | no | Structured logs / spans / metrics on new endpoints |
+| `prompt-quality` | no | Prompt quality: clarity, scope, output format, must-nots |
 
-### Profiles (8)
+### Profiles (9)
 
 | Profile | Bundles | One-line |
 |---------|---------|----------|
 | `starter` | 1 skill + 2 rules | Minimal honest-agent pack |
-| `fullstack` | 3 agents + 1 skill + 3 rules | Full-stack web dev team |
-| `frontend` | 5 agents + 1 skill + 2 rules | Frontend / UI / UX team |
-| `backend` | 5 agents + 3 rules | Backend + database team |
-| `ai` | 3 agents + 2 skills + 2 rules | AI/ML engineering team |
-| `devops` | 5 agents + 2 rules | DevOps + incident response team |
-| `security` | 3 agents + 1 rule | Security review team |
-| `context` | 8 skills + 1 rule | The full context-system suite |
+| `fullstack` | 6 agents + 2 skills + 8 rules | Full-stack web dev team + API/a11y reviewers |
+| `frontend` | 6 agents + 3 skills + 5 rules | Frontend / UI / UX team + a11y auditor |
+| `backend` | 9 agents + 2 skills + 7 rules | Backend + realtime + schema + API/security rules |
+| `ai` | 4 agents + 3 skills + 3 rules | AI/ML + prompt architecture team |
+| `devops` | 7 agents + 3 skills + 4 rules | DevOps + observability + cost + postmortem |
+| `security` | 4 agents + 3 rules | Security + API review team |
+| `qa` | 7 agents + 2 skills + 4 rules | Full QA team: review, API, a11y, test automation |
+| `context` | 13 skills + 2 rules | The full context-system + workflow suite |
 
-### Scripts (3)
+### Scripts (11)
 
 | Script | Use for |
 |--------|---------|
 | `lint-artifacts` | Validate `author` frontmatter + correct extensions |
 | `validate-profiles` | Structural lint of `profiles/*.yaml` |
 | `stats` | Print the full catalog inventory |
+| `audit-catalog` | Find missing author, orphan files, duplicate names |
+| `check-compat` | Strict agentry-compatibility gate (CI) |
+| `dedupe` | Find near-duplicate agents/skills by description |
+| `gen-index` | Regenerate README catalog tables from the live tree |
+| `release` | Bump version + generate changelog + tag |
+| `sync` | Thin wrapper around `agentry add` for installing the catalog |
+| `onboard` | Print a contributor onboarding guide |
+| `backup` | Bundle the catalog into a git bundle or tarball |
 
 ## Artifact layouts
 
@@ -143,8 +178,9 @@ agent-tools/
 ├── skills/                      ← one folder per skill, with SKILL.md
 │   ├── <category>/<name>/SKILL.md
 │   └── <name>/SKILL.md
-├── rules/                      ← one .mdc file per rule
-│   └── <name>.mdc
+├── rules/                       ← one .mdc file per rule
+│   ├── <category>/<name>.mdc    ← categorized (global/, code/)
+│   └── <name>.mdc               ← domain rules stay flat
 ├── profiles/                   ← one .yaml file per install bundle
 │   └── <name>.yaml
 ├── scripts/                    ← one folder per use-case
@@ -201,8 +237,16 @@ the catalog:
 
 ```bash
 node scripts/lint-artifacts/run.mjs      # check author + extensions
-node scripts/validate-profiles/run.mjs  # lint profiles/*.yaml
-node scripts/stats/run.mjs              # print catalog inventory
+node scripts/validate-profiles/run.mjs   # lint profiles/*.yaml
+node scripts/check-compat/run.mjs        # strict agentry-compat gate
+node scripts/audit-catalog/run.mjs       # find missing author / dup names
+node scripts/dedupe/run.mjs              # find near-duplicate descriptions
+node scripts/gen-index/run.mjs           # regen README catalog tables
+node scripts/stats/run.mjs               # print catalog inventory
+node scripts/release/run.mjs             # bump version + changelog + tag
+node scripts/sync/run.mjs ../my-app      # install catalog into a target
+node scripts/onboard/run.mjs             # print contributor onboarding
+node scripts/backup/run.mjs              # bundle the catalog for restore
 ```
 
 ## Contributing
