@@ -133,9 +133,13 @@ artifacts by `id`; scripts are folders with a `README.md` + runnable file.
   `product-manager`, `agent-organizer`.
 - **skills/** — `context/` (10 context-system skills), `workflow/` (spec,
   estimate, triage, release, scaffold), `audit/` (a11y) + flat `enhance-prompt`.
-- **rules/** — `global/` (5 always-on workflow rules), `code/` (code-style,
+- **rules/** — `global/` (7 always-on rules: ask-dont-guess, files-folders-structure,
+  git-workflow, migration, project-context, caveman, ponytail), `code/` (code-style,
   testing, error-handling, performance, accessibility) + flat domain rules
   (`security`, `api-design`, `observability`, `prompt-quality`).
+- **scripts/** — `naming/` (the files-folders checker the rule references) +
+  catalog-maintenance scripts (lint-artifacts, validate-profiles, stats,
+  audit-catalog, check-compat, dedupe, gen-index, release, sync, onboard, backup).
 
 ## License
 

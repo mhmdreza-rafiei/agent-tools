@@ -10,7 +10,7 @@ Works with Cursor, Claude Code, Codex, OpenCode, and 70+ more.
 [![agentry](https://img.shields.io/badge/agentry-compatible-38bdf8?style=flat)](https://github.com/mhmdreza-rafiei/agentry)
 [![agents](https://img.shields.io/badge/agents-46-38bdf8?style=flat)](agents)
 [![skills](https://img.shields.io/badge/skills-17-38bdf8?style=flat)](skills)
-[![rules](https://img.shields.io/badge/rules-14-38bdf8?style=flat)](rules)
+[![rules](https://img.shields.io/badge/rules-16-38bdf8?style=flat)](rules)
 [![profiles](https://img.shields.io/badge/profiles-9-38bdf8?style=flat)](profiles)
 
 ## Install
@@ -41,7 +41,7 @@ agentry list
 
 ## What's in the catalog
 
-**97 artifacts** — 46 agents, 17 skills, 14 rules, 9 profiles, 11 scripts.
+**100 artifacts** — 46 agents, 17 skills, 16 rules, 9 profiles, 12 scripts.
 Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 
 ### Agents (46)
@@ -117,7 +117,7 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `audit/` | `a11y` | Accessibility audit: axe, keyboard, contrast, motion |
 | (flat) | `enhance-prompt` | Rewrite vague chat into precise, portable agent prompts |
 
-### Rules (14)
+### Rules (16)
 
 | Rule | Always apply | Use for |
 |------|--------------|---------|
@@ -126,6 +126,8 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `global/git-workflow` | yes | Conventional Commits, backups, commit/push permission |
 | `global/migration` | yes | Safe refactors: moves, renames, splits, ref updates |
 | `global/project-context` | yes | Read and update project context after every task |
+| `global/caveman` | yes | Terse responses with full technical substance |
+| `global/ponytail` | yes | Lazy senior dev mode: simplest solution that works |
 | `code/code-style` | no | In-code style: formatting, naming, structure |
 | `code/testing` | no | Testing bar: what must be tested, coverage floors |
 | `code/error-handling` | no | Forbid silent catches; require typed errors + logging |
@@ -150,10 +152,11 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `qa` | 7 agents + 2 skills + 4 rules | Full QA team: review, API, a11y, test automation |
 | `context` | 13 skills + 2 rules | The full context-system + workflow suite |
 
-### Scripts (11)
+### Scripts (12)
 
 | Script | Use for |
 |--------|---------|
+| `naming` | Audit file/folder paths against the files-folders-structure rule |
 | `lint-artifacts` | Validate `author` frontmatter + correct extensions |
 | `validate-profiles` | Structural lint of `profiles/*.yaml` |
 | `stats` | Print the full catalog inventory |
@@ -236,6 +239,7 @@ The `scripts/` folder contains dependency-free Node ESM scripts for maintaining
 the catalog:
 
 ```bash
+python scripts/naming/check.py .             # audit file/folder naming
 node scripts/lint-artifacts/run.mjs      # check author + extensions
 node scripts/validate-profiles/run.mjs   # lint profiles/*.yaml
 node scripts/check-compat/run.mjs        # strict agentry-compat gate
