@@ -82,21 +82,22 @@ Add depth only when needed; **merge** into one file when a split folder would ho
 
 ## Checker script (run before claiming paths are valid)
 
-From project root:
+The checker ships with this catalog at `scripts/naming/check.py`. From the
+catalog root (or your project root after installing the script):
 
 ```bash
-python "%USERPROFILE%\.cursor\scripts\check_files_folders.py" .
+python scripts/naming/check.py .
 ```
 
 One path (why it fails):
 
 ```bash
-python "%USERPROFILE%\.cursor\scripts\check_files_folders.py" --explain core/coreapi_call.py
+python scripts/naming/check.py --explain core/coreapi_call.py
 ```
 
 Use `--json` for machine-readable output. Fix reported paths; use **migration** for renames.
 
-**Agents:** Do not approve naming by eye alone — run the checker (or `--explain` on doubtful paths).
+**Agents:** Do not approve naming by eye alone -- run the checker (or `--explain` on doubtful paths).
 
 ## Existing tree vs new work
 
