@@ -1,6 +1,6 @@
 <div align="center">
 
-# agent-tools
+# Agent-tools
 
 **A catalog of agent artifacts — agents, skills, rules, scripts, and profiles —
 installable into any coding agent via [agentry](https://github.com/mhmdreza-rafiei/agentry).**
