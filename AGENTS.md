@@ -81,13 +81,14 @@ Author: mhmdreza_rafiei
 
 ### Profiles (`profiles/<name>.yaml`)
 
-The agentry profile schema (zod-validated) strips unknown keys, so `author`
-goes in a YAML comment at the top:
+The agentry profile schema (zod-validated) strips unknown keys on parse, but
+the `author` field is kept in the source file for attribution. Put it as a
+real top-level field after `description`:
 
 ```yaml
-# author: mhmdreza_rafiei
 name: <name>
 description: <one-line description>
+author: mhmdreza_rafiei
 scope: project
 targets:
   agents: ['cursor', 'claude-code']

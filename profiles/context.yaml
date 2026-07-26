@@ -1,0 +1,20 @@
+name: context
+description: The full context-system suite — all 8 context skills for project setup, planning, review, memory, and recovery.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  skills:
+    - id: context/groundwork
+    - id: context/architect
+    - id: context/review
+    - id: context/validate
+    - id: context/remember
+    - id: context/recover
+    - id: context/imprint
+    - id: context/run-team
+  rules:
+    - id: project-context

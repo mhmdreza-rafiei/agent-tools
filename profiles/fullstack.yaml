@@ -1,0 +1,19 @@
+name: fullstack
+description: Full-stack web development — frontend, backend, and full-stack agents plus the core workflow rules.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  agents:
+    - id: frontend/frontend-developer
+    - id: backend/backend-architect
+    - id: backend/full-stack-developer
+  skills:
+    - id: enhance-prompt
+  rules:
+    - id: ask-dont-guess
+    - id: files-folders-structure
+    - id: git-workflow

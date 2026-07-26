@@ -1,0 +1,14 @@
+name: starter
+description: Minimal starter pack — one skill and two core rules to keep any agent honest and consistent.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  skills:
+    - id: enhance-prompt
+  rules:
+    - id: ask-dont-guess
+    - id: git-workflow

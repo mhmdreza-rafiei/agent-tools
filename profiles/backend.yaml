@@ -1,0 +1,19 @@
+name: backend
+description: Backend-focused team — architecture, full-stack, GraphQL, and database specialists.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  agents:
+    - id: backend/backend-architect
+    - id: backend/full-stack-developer
+    - id: backend/graphql-architect
+    - id: data/database-optimizer
+    - id: data/postgres-pro
+  rules:
+    - id: ask-dont-guess
+    - id: migration
+    - id: git-workflow

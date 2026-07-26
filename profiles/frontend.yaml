@@ -1,0 +1,20 @@
+name: frontend
+description: Frontend-focused team — UI, UX, React, Next.js, and the foundational frontend developer.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  agents:
+    - id: frontend/frontend-developer
+    - id: frontend/ui-designer
+    - id: frontend/ux-designer
+    - id: frontend/react-pro
+    - id: frontend/nextjs-pro
+  skills:
+    - id: enhance-prompt
+  rules:
+    - id: ask-dont-guess
+    - id: files-folders-structure

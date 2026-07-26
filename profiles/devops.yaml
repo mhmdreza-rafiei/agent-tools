@@ -1,0 +1,18 @@
+name: devops
+description: DevOps team — cloud architecture, deployment, performance, and incident response.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  agents:
+    - id: devops/cloud-architect
+    - id: devops/deployment-engineer
+    - id: devops/performance-engineer
+    - id: devops/incident-responder
+    - id: devops/devops-incident-responder
+  rules:
+    - id: git-workflow
+    - id: ask-dont-guess

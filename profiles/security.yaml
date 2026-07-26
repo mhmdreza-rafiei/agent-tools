@@ -1,0 +1,15 @@
+name: security
+description: Security review team — security auditor plus code and architecture reviewers.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  agents:
+    - id: security-auditor
+    - id: qa/code-reviewer
+    - id: qa/architect-review
+  rules:
+    - id: git-workflow

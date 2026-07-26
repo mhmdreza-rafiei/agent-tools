@@ -1,0 +1,19 @@
+name: ai
+description: AI/ML engineering team — AI apps, ML pipelines, and prompt engineering, with the architect skill for planning.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  agents:
+    - id: ai/ai-engineer
+    - id: ai/ml-engineer
+    - id: ai/prompt-engineer
+  skills:
+    - id: enhance-prompt
+    - id: context/architect
+  rules:
+    - id: ask-dont-guess
+    - id: git-workflow
