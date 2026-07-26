@@ -1,3 +1,5 @@
+<div align="center">
+
 # agent-tools
 
 **A catalog of agent artifacts — agents, skills, rules, scripts, and profiles —
@@ -10,38 +12,34 @@ Works with Cursor, Claude Code, Codex, OpenCode, and 70+ more.
 [![agentry](https://img.shields.io/badge/agentry-compatible-38bdf8?style=flat)](https://github.com/mhmdreza-rafiei/agentry)
 [![agents](https://img.shields.io/badge/agents-46-38bdf8?style=flat)](agents)
 [![skills](https://img.shields.io/badge/skills-17-38bdf8?style=flat)](skills)
-[![rules](https://img.shields.io/badge/rules-16-38bdf8?style=flat)](rules)
+[![rules](https://img.shields.io/badge/rules-17-38bdf8?style=flat)](rules)
 [![profiles](https://img.shields.io/badge/profiles-9-38bdf8?style=flat)](profiles)
+
+</div>
 
 ## Install
 
 ```bash
-# Install the agentry CLI (one time)
 npm install -g @mhmdreza-rafiei/agentry
-
-# Then install artifacts from this catalog into any project
-agentry add agents mhmdreza-rafiei/agent-tools
 ```
 
 ## Quick start
 
 ```bash
-# Browse everything in the catalog
-agentry list mhmdreza-rafiei/agent-tools
+# Install the entire catalog
+agentry add profile mhmdreza-rafiei/agent-tools fullstack --all
 
-# Install one agent to Cursor + Claude Code
-agentry add agents mhmdreza-rafiei/agent-tools frontend/frontend-developer -a cursor -a claude-code
-
-# Install a whole bundle (profile) in one shot
+# Install by kind
+agentry add skills  mhmdreza-rafiei/agent-tools --all
+agentry add agents  mhmdreza-rafiei/agent-tools --all
+agentry add rules   mhmdreza-rafiei/agent-tools --all
+agentry add scripts mhmdreza-rafiei/agent-tools --all
 agentry add profile mhmdreza-rafiei/agent-tools fullstack
-
-# See what is already installed in your project
-agentry list
 ```
 
 ## What's in the catalog
 
-**100 artifacts** — 46 agents, 17 skills, 16 rules, 9 profiles, 12 scripts.
+**101 artifacts** — 46 agents, 17 skills, 17 rules, 9 profiles, 12 scripts.
 Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 
 ### Agents (46)
@@ -117,7 +115,7 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `audit/` | `a11y` | Accessibility audit: axe, keyboard, contrast, motion |
 | (flat) | `enhance-prompt` | Rewrite vague chat into precise, portable agent prompts |
 
-### Rules (16)
+### Rules (17)
 
 | Rule | Always apply | Use for |
 |------|--------------|---------|
@@ -128,6 +126,7 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `global/project-context` | yes | Read and update project context after every task |
 | `global/caveman` | yes | Terse responses with full technical substance |
 | `global/ponytail` | yes | Lazy senior dev mode: simplest solution that works |
+| `global/ai-attribution` | yes | AI git co-authorship: explain, prevent, remove safely |
 | `code/code-style` | no | In-code style: formatting, naming, structure |
 | `code/testing` | no | Testing bar: what must be tested, coverage floors |
 | `code/error-handling` | no | Forbid silent catches; require typed errors + logging |
@@ -196,34 +195,12 @@ Profiles carry `author: mhmdreza_rafiei` as a top-level field (the agentry
 zod schema strips unknown keys on parse, but the field stays in source for
 attribution).
 
-## Examples
-
-```bash
-# List everything in the catalog
-agentry list mhmdreza-rafiei/agent-tools
-agentry list mhmdreza-rafiei/agent-tools agents
-agentry list mhmdreza-rafiei/agent-tools skills
-
-# Install single artifacts
-agentry add agents mhmdreza-rafiei/agent-tools frontend/react-pro -a cursor
-agentry add skills mhmdreza-rafiei/agent-tools enhance-prompt -a cursor -a claude-code
-agentry add rules  mhmdreza-rafiei/agent-tools git-workflow
-
-# Install a whole bundle
-agentry add profile mhmdreza-rafiei/agent-tools fullstack
-agentry add profile mhmdreza-rafiei/agent-tools context
-
-# Update / remove
-agentry update agents mhmdreza-rafiei/agent-tools
-agentry remove skills enhance-prompt
-```
-
 ## Compatibility
 
 This catalog is built for [agentry](https://github.com/mhmdreza-rafiei/agentry),
 which installs into Cursor, Claude Code, Codex, OpenCode, Gemini CLI, Windsurf,
 and 70+ more. Universal providers share `.agents/skills/`; others get a
-symlink or copy (e.g. Claude Code → `.claude/skills`).
+symlink or copy (e.g. Claude Code -> `.claude/skills`).
 
 Discovery rules (see [agentry discovery.ts](https://github.com/mhmdreza-rafiei/agentry/blob/main/src/artifacts/discovery.ts)):
 
@@ -235,7 +212,7 @@ Discovery rules (see [agentry discovery.ts](https://github.com/mhmdreza-rafiei/a
 
 ## Local scripts
 
-The `scripts/` folder contains dependency-free Node ESM scripts for maintaining
+The `scripts/` folder contains dependency-free scripts for maintaining
 the catalog:
 
 ```bash
@@ -252,12 +229,6 @@ node scripts/sync/run.mjs ../my-app      # install catalog into a target
 node scripts/onboard/run.mjs             # print contributor onboarding
 node scripts/backup/run.mjs              # bundle the catalog for restore
 ```
-
-## Contributing
-
-When adding a new agent, skill, rule, profile, or script, follow the layout
-above and the frontmatter conventions in [AGENTS.md](AGENTS.md). Run
-`node scripts/lint-artifacts/run.mjs` before committing to catch drift.
 
 ## License
 

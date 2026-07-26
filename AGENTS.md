@@ -133,10 +133,10 @@ artifacts by `id`; scripts are folders with a `README.md` + runnable file.
   `product-manager`, `agent-organizer`.
 - **skills/** — `context/` (10 context-system skills), `workflow/` (spec,
   estimate, triage, release, scaffold), `audit/` (a11y) + flat `enhance-prompt`.
-- **rules/** — `global/` (7 always-on rules: ask-dont-guess, files-folders-structure,
-  git-workflow, migration, project-context, caveman, ponytail), `code/` (code-style,
-  testing, error-handling, performance, accessibility) + flat domain rules
-  (`security`, `api-design`, `observability`, `prompt-quality`).
+- **rules/** — `global/` (8 always-on rules: ask-dont-guess, files-folders-structure,
+  git-workflow, migration, project-context, caveman, ponytail, ai-attribution),
+  `code/` (code-style, testing, error-handling, performance, accessibility)
+  + flat domain rules (`security`, `api-design`, `observability`, `prompt-quality`).
 - **scripts/** — `naming/` (the files-folders checker the rule references) +
   catalog-maintenance scripts (lint-artifacts, validate-profiles, stats,
   audit-catalog, check-compat, dedupe, gen-index, release, sync, onboard, backup).
@@ -149,9 +149,11 @@ catalog. Author for all artifacts: `mhmdreza_rafiei`.
 ## When working on this repo
 
 - Follow the user rules (ask-dont-guess, files-folders-structure, git-workflow,
-  migration, project-context) — they live in the Cursor rules config, not in
-  this repo. The `rules/global/` folder is the catalog's installable copy.
+  migration, project-context, caveman, ponytail, ai-attribution) — they live in
+  the Cursor rules config, not in this repo. The `rules/global/` folder is the
+  catalog's installable copy.
 - Conventional Commits only; ask before pushing.
+- Never add `Co-authored-by:` trailers for AI agents (see `ai-attribution` rule).
 - For renames/moves: use `git mv`, update references, verify, then remove old.
 - Run `node scripts/lint-artifacts/run.mjs` and `node scripts/check-compat/run.mjs`
   before committing to catch frontmatter, extension, or compatibility drift.
