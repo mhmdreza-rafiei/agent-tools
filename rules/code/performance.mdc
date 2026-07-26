@@ -1,0 +1,41 @@
+---
+description: Performance requirements — budgets, measurement, avoid premature optimization — loaded on demand when performance matters
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# Performance
+
+Applies when **performance is a stated requirement or the change touches a
+hot path**. Load for user-facing features, data pipelines, hot loops. Not
+every chat — premature optimization is a real cost.
+
+## Budget before optimization
+
+- A performance change needs a budget: LCP / TBT / CLS for web, p95 / p99
+  latency for APIs, throughput for pipelines. No budget → no target → no
+  way to know when to stop.
+- If the user gave no budget, ask once. If they don't know, propose a sane
+  default and label it as a suggestion.
+
+## Measure, then fix
+
+- Measure before optimizing. A guess about where time goes is usually wrong.
+- Fix the measured bottleneck, then re-measure. One bottleneck at a time.
+- The cheapest fix is usually algorithmic (a better data structure, fewer
+  passes, an index), not a micro-optimization.
+
+## Hot paths
+
+- N+1 queries, repeated parsing, re-reading the same file, synchronous I/O
+  in a loop — these are the usual suspects. Check them first.
+- Cache only what is expensive and stable. A cache invalidation bug is
+  worse than no cache.
+
+## Do not
+
+- Optimize without a budget and a measurement.
+- Trade correctness for speed without flagging it (a `ponytail:` comment
+  naming the ceiling is fine).
+- Add a dependency for a perf gain the stdlib already covers.
+- Micro-optimize a path that isn't hot.

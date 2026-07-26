@@ -1,0 +1,43 @@
+---
+description: Prompt quality rules - clarity, precision, scope, output format, measurability, must-nots - loaded on demand for prompt engineering or when building new agent instructions
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# Prompt quality
+
+Applies when writing or enhancing prompts, or authoring new agent instructions.
+Load for enhance-prompt or for new agent development. Not every chat - only when
+prompt quality is a concern.
+
+## Clarity and precision
+
+- Specific verbs: Prefer create to make, implement to do.
+- Concrete nouns: API endpoint instead of stuff.
+- Unambiguous scope: State what is in scope, and what is explicitly out.
+- Audience: Write for the target agent (if known), or a general implementer.
+
+## Output format
+
+- Specify format: Always state the desired output format (Markdown, JSON, code block).
+- Structure: If structured output is expected, give a template or example.
+- Completeness: Define what a complete answer looks like.
+
+## Measurability
+
+- Acceptance criteria: For tasks, include 1-3 measurable acceptance criteria.
+  These allow the implementing agent to self-verify.
+- Verification steps: Explicitly state how the output can be verified.
+
+## Must-nots
+
+- Forbidden actions: Explicitly state actions that must NOT be taken. These
+  act as guardrails (e.g. no breaking changes, do not modify X).
+- Exclusions: State things that are out of scope or should not be included.
+
+## Do not
+
+- Invent requirements: Never assume or invent requirements the user did not state.
+- Inject local context: Avoid workspace-local paths, stack, credentials.
+- Be vague: Avoid words like improve, make better without concrete definitions.
+- Conflate what with how: Separate the desired outcome from implementation details.

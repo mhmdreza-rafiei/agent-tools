@@ -1,0 +1,47 @@
+---
+description: Error handling patterns — no silent catches, typed errors, errors at the edges — loaded on demand for code work
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# Error handling
+
+Applies when **writing code that can fail** (I/O, parsing, network, auth,
+migrations). Load for features touching failure paths. Not every chat.
+
+## No silent catches
+
+- Never catch and swallow. An empty `catch` block is a bug waiting to ship.
+- If you catch, you either (a) handle it (recover + continue), (b) rethrow
+  with context, or (c) log + propagate. There is no fourth option.
+- `return null` on error is silent failure. Prefer returning an error /
+  Result type so the caller knows.
+
+## Typed errors
+
+- Errors are typed and named, not bare strings or generic exceptions. A
+  caller should be able to branch on the error type.
+- Include the operation, the input that failed (redacted if sensitive),
+  and the underlying cause in the error.
+- Wrap, don't replace: `raise MyError("parse failed", cause=e)` not
+  `raise MyError("parse failed")`.
+
+## Errors at the edges
+
+- Fail fast at trust boundaries (parse, validate, auth). Inside the core,
+  propagate; let the edge (handler, controller, CLI) decide the response.
+- One place translates internal errors to the outside shape (HTTP status,
+  CLI exit code, log line). Don't scatter translation across the core.
+
+## Logging
+
+- Log with context (what, which input, which user/tenant) at the point of
+  the catch, not deep in the core where context is lost.
+- Never log secrets (tokens, passwords, PII). Redact before logging.
+
+## Do not
+
+- Catch `Exception` / `Throwable` to keep going — you'll hide bugs.
+- Retry without a backoff and a cap — you'll amplify an outage.
+- Turn a recoverable error into a process crash (or vice versa) without
+  intent.

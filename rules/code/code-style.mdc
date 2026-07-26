@@ -1,0 +1,45 @@
+---
+description: Code style conventions (formatting, in-code naming, structure) — loaded on demand for code work, not every chat
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# Code style
+
+Applies when **writing or refactoring code**. Not every chat — load when the
+task touches code. Pairs with `files-folders-structure` (which owns *paths*;
+this owns *in-code* style).
+
+## Formatting
+
+- Follow the project's existing formatter config (prettier, black, gofmt,
+  rustfmt). If none exists, do not invent one — ask.
+- One statement per line; no chained ternaries; no `&&` / `||` for control
+  flow where an `if` is clearer.
+- Trailing commas where the language allows (diff-friendly).
+
+## Naming
+
+- Match the surrounding code's convention (camelCase / snake_case). Do not
+  mix conventions within a file.
+- Names describe what, not how: `pendingOrders`, not `array1`.
+- Booleans read as yes/no: `isActive`, `hasAccess`, `canWrite`.
+- Avoid abbreviations except domain-standard ones (`url`, `id`, `db`).
+
+## Structure
+
+- One responsibility per function; if a function needs a comment to explain
+  *what* it does, split it.
+- Pure where cheap; side effects at the edges (handlers, controllers).
+- Early returns for the unhappy path; the happy path stays unindented.
+
+## When in doubt
+
+- Read three neighbors; mimic the majority.
+- If the project has a linter, its output is the spec — do not argue with it.
+
+## Do not
+
+- Reformat code outside the change you own (noise diffs).
+- Introduce a new pattern where an existing one fits.
+- Rename user-stated field names (`phone` stays `phone`).

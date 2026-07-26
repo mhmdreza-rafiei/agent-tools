@@ -1,0 +1,47 @@
+---
+description: API design rules — versioning, pagination, error shape, idempotency — loaded on demand for API work
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# API design
+
+Applies when **designing or changing an API** (REST, RPC, GraphQL). Load
+for new endpoints, version bumps, breaking changes. Not every chat.
+
+## Versioning
+
+- Version explicitly and early. `/v1/...` in the path, or a header — pick
+  one and be consistent across the API.
+- A breaking change bumps the major version; it does not silently change a
+  v1 response shape.
+- Deprecate, don't delete: mark the old version deprecated, set a sunset
+  date, document the migration.
+
+## Pagination
+
+- Paginate every list endpoint. Default page size; max page size enforced.
+- Prefer cursor over offset for large / mutable tables (offset skips rows
+  when data shifts).
+- Return pagination metadata in a stable shape (`next_cursor`, `has_more`).
+
+## Error shape
+
+- One consistent error shape across the API: `code`, `message`, optional
+  `details`. HTTP status matches the semantics (4xx client, 5xx server).
+- Errors are machine-readable: a stable `code`, not a free-text message.
+- 404 for "doesn't exist"; 401 for "who are you"; 403 for "you can't";
+  409 for "already exists / conflict". Don't overload 400 for everything.
+
+## Idempotency
+
+- `GET`, `HEAD`, `OPTIONS` are safe. `PUT`, `DELETE` are idempotent.
+- `POST` that creates / charges / sends is made idempotent via an
+  idempotency key (`Idempotency-Key` header) — duplicate retries must not
+  double-charge.
+
+## Do not
+
+- Change a response shape without a version bump.
+- Return a 200 with an error body. Status must match the body.
+- Leak internal stack traces or IDs in error responses.

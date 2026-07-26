@@ -1,0 +1,47 @@
+---
+description: Security requirements — input validation at trust boundaries, secret handling, auth — loaded on demand for security-sensitive work
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# Security
+
+Applies when **the change touches auth, input parsing, secrets, or a trust
+boundary**. Load for login, payment, file upload, external API calls,
+migrations of credential stores. Not every chat.
+
+## Trust boundaries
+
+- Every input from outside the process (HTTP, CLI args, files, env, queue
+  messages) is untrusted. Validate at the boundary; never carry untrusted
+  data into the core.
+- Validate type, length, format, and ranges. Reject early; fail closed.
+- Auth checks happen at the edge, not deep in the core. The core assumes
+  the caller is authorized.
+
+## Secrets
+
+- Never hardcode secrets. Read from env / secret manager.
+- Never log secrets (tokens, passwords, API keys, PII). Redact before
+  logging; assume the log is public.
+- `.env` and credential files are never committed. If you see one staged,
+  unstage and warn the user.
+
+## Auth
+
+- Hash passwords with a slow KDF (argon2, bcrypt, scrypt). Never MD5/SHA
+  for passwords.
+- Tokens: short-lived, scoped, revocable. Rotate via refresh, not long-lived
+  access tokens.
+- Constant-time comparison for tokens / hashes. No early-return on mismatch.
+
+## Injection
+
+- Parameterize queries. No string-built SQL / shell / LDAP.
+- Escape at the output boundary (HTML, URL, JS) — not by hand-rolling.
+
+## Do not
+
+- Roll your own crypto. Use the stdlib / audited library.
+- Trust client-side validation. The server re-validates everything.
+- Ship a secret in a URL / query param (it gets logged).

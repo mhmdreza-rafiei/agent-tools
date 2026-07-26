@@ -1,0 +1,47 @@
+---
+description: Observability requirements — structured logs, spans, metrics on new endpoints — loaded on demand for ops-sensitive work
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# Observability
+
+Applies when **adding or changing a path that runs in production**
+(endpoints, jobs, queues, workers). Load for new services, hot-path
+changes, incident prep. Not every chat.
+
+## Logs
+
+- Structured logs (JSON), not free-text lines. A log entry has: timestamp,
+  level, event, request_id, and the relevant IDs (user, tenant, order).
+- Log at the boundaries (in / out / error), not every line inside.
+- Never log secrets or PII. Redact before logging.
+- Levels mean what they say: `error` is actionable, `warn` is suspicious,
+  `info` is a normal event. Don't `info`-spam.
+
+## Metrics
+
+- Counters for events (requests, errors, retries); histograms for
+  distributions (latency, payload size); gauges for current state (queue
+  depth, in-flight requests).
+- Label by route / status / tenant — enough to slice, not so much that
+  cardinality explodes.
+
+## Tracing
+
+- One span per unit of work (one request, one queue job, one DB call).
+- Propagate the trace context across service boundaries (W3C traceparent).
+- The span name is the operation, not the URL (`"create_order"`, not
+  `"/v1/orders"`).
+
+## The three together
+
+- A user reports a slow checkout. Logs find the error; metrics show it's
+  p99 not median; traces show which downstream is the bottleneck. Build
+  for that query.
+
+## Do not
+
+- Add a log line per loop iteration.
+- Use `print` / `console.log` for production observability.
+- Ship an endpoint with no request_id — you can't correlate its logs.

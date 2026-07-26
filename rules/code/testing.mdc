@@ -1,0 +1,46 @@
+---
+description: Testing requirements — what must be tested, coverage floors, unit vs integration vs E2e — loaded on demand for code work
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# Testing
+
+Applies when **writing or changing code that should be tested**. Load for
+features, bug fixes, refactors. Not every chat.
+
+## What must be tested
+
+- **Trust boundaries** — every input parser, validator, and auth check has
+  tests. Untested trust boundaries ship vulnerabilities.
+- **Branches that can fail silently** — error paths, edge cases, empty
+  inputs, off-by-one. The happy path is the last to test, not the first.
+- **Anything with a public contract** — exported functions, API endpoints,
+  CLI flags. If a caller can reach it, it has a test.
+
+## Coverage
+
+- Coverage is a floor, not a goal. Aim for the trust boundaries and public
+  contracts at 100%; ignore the rest unless the project sets a bar.
+- A new line of logic leaves the smallest runnable check behind (assert-
+  based demo or one small test). Trivial one-liners need no test.
+
+## Unit vs integration vs E2E
+
+- **Unit** — pure logic, fast, no I/O. The default.
+- **Integration** — when the bug is at the seam (DB, API, file system). Use
+  when unit tests would mock the thing that's actually broken.
+- **E2E** — for user-facing flows that have failed before. Don't E2E what a
+  unit test already covers; E2E is slow and flaky.
+
+## Bug fixes
+
+- A bug fix lands with a test that fails before the fix and passes after.
+  No reproducer test → the bug will regress.
+
+## Do not
+
+- Test implementation details that should be free to change.
+- Mock what you don't own to the point the test proves nothing.
+- Skip the failing path because it's hard to set up — that's the path that
+  ships bugs.

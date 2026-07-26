@@ -1,0 +1,54 @@
+---
+description: Accessibility requirements — WCAG 2.2 AA floor, ARIA, keyboard, contrast — loaded on demand for UI work
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# Accessibility
+
+Applies when **building or changing UI**. Load for components, pages,
+forms. Not every chat. The floor is WCAG 2.2 AA — not a ceiling, a floor.
+
+## Keyboard
+
+- Every interactive element is reachable and operable via keyboard.
+- Visible focus on every focusable element; never remove the outline
+  without replacing it.
+- Logical tab order; no keyboard traps (a modal must trap and release
+  cleanly).
+
+## Semantics & ARIA
+
+- Use native semantics first (`button`, `nav`, `dialog`). Add ARIA only
+  where native semantics are missing or insufficient.
+- `aria-label` / `aria-labelledby` on icon-only buttons and ambiguous
+  controls; never duplicate a visible label as an `aria-label`.
+- Live regions (`aria-live`) for dynamic updates that a screen-reader user
+  would otherwise miss.
+
+## Labels & names
+
+- Every input has a visible `<label>` (or equivalent). No
+  `placeholder`-as-label.
+- Every interactive element has an accessible name.
+- Required fields indicated programmatically (`required`, `aria-required`),
+  not by color or text alone.
+
+## Contrast & motion
+
+- Text contrast ≥ 4.5:1 (normal), ≥ 3:1 (large). UI components and
+  graphical objects ≥ 3:1.
+- Respect `prefers-reduced-motion`; no autoplaying motion that can't be
+  paused.
+
+## Do not
+
+- Ship a UI change without a keyboard check.
+- Use color or icon alone to convey state — add text or `aria-label`.
+- Add ARIA that duplicates native semantics (redundant `role="button"` on
+  a `<button>`).
+
+## Related
+
+- `/audit/a11y` — runs the audit that checks this rule.
+- `agents/qa/accessibility-auditor` — owns the deeper fix work.
