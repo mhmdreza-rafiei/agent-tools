@@ -1,0 +1,73 @@
+---
+description: Safe refactors—moves, renames, and splitting code; update all references before removing the old
+alwaysApply: true
+author: mhmdreza_rafiei
+---
+
+# Code migration (structure & location)
+
+Structural changes: **move/rename** files or folders, **relocate** symbols to another module, **split/merge** files, or **rename** exports used across the repo.
+
+**Not** database schema migrations (use project-specific migration tools for those).
+
+**Skip** when the task is chat-only or a tiny edit with no path or module boundary change.
+
+## Before you change anything
+
+1. **Inventory** — Search for the old path, file name, folder name, and public symbols (imports, `require`, dynamic imports, string paths, URLs in config).
+2. **Plan** — List what will move, what will reference it, and config/docs that must change (build, test, CI, Docker, path aliases, `package.json` exports, OpenAPI paths, etc.).
+3. **Checkpoint** — If the repo has git, suggest a local commit (per git-workflow) before large moves so rollback is one command away.
+4. **Prefer `git mv`** when using git — preserves history and makes the rename obvious in diffs.
+
+## Execution order (safeguards)
+
+Do **not** delete or drop the old location until the migration is verified.
+
+```text
+1. Add destination (new file/folder or new exports) — copy or move content
+2. Update every consumer (imports, configs, docs, tests, assets)
+3. Verify (grep, build, tests, run app if relevant)
+4. Remove old only when nothing legitimate still points at it
+```
+
+- **Move/rename:** Update references **first or in the same change set** as the move; never leave the tree broken overnight if avoidable.
+- **Extract code to another file:** New module must compile and callers must use it; **then** remove duplicated code from the source file.
+- **Rename symbol:** Update definitions, imports, re-exports, tests, and docs; grep old name before deleting anything.
+
+## Removing the old version
+
+| Situation | Rule |
+|-----------|------|
+| Old file after move | Delete only after zero stale path references and verification passes |
+| Leftover duplicate logic | Remove duplicate after behavior is unchanged (diff mentally or test) |
+| Empty directory | Remove after children moved and tooling does not require the path |
+| Public API rename | Ask if a **compat shim** is needed (`re-export` / deprecated alias) unless user asked for a clean break |
+
+**Never** mass-delete old paths on assumption. Run targeted search for old paths and names; fix stragglers (generated files, snapshots, lockfiles only if the tool requires it).
+
+## Reference surfaces (checklist)
+
+- Source: imports, barrels (`index.ts`), lazy/dynamic paths, string literals
+- Tooling: `tsconfig`/`jsconfig`, webpack/vite/rollup, eslint, jest/vitest roots, Storybook, `.github/workflows`
+- Docs: README, ADRs, comments with paths, embedded examples
+- Monorepos: workspace packages, internal package names, turbo/nx project roots
+
+## Verification (required before calling it done)
+
+1. Search repo for **old** path segments and file names (case-sensitive where the stack cares).
+2. Confirm **new** paths exist and resolve (build or typecheck when the project has it).
+3. Run relevant tests or smoke the feature if the user expects it.
+4. Report what was removed and what was kept (e.g. temporary re-exports).
+
+## If something breaks
+
+- Restore from git if available; do not force-delete history.
+- Re-add removed files from git or backup before retrying.
+- Prefer smaller incremental moves over one giant delete-and-hope changeset.
+
+## Success criteria
+
+- Single source of truth for each moved symbol; no orphaned duplicates unless intentionally shimmed.
+- No broken imports or config paths.
+- Old locations removed only after verification.
+- User informed of any breaking rename and optional follow-up (changelog, compat removal).

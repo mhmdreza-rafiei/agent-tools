@@ -1,0 +1,111 @@
+---
+description: Folder and file naming, layout, grouping; fix legacy paths only with permission
+alwaysApply: true
+author: mhmdreza_rafiei
+---
+
+# Files and folders (naming & structure)
+
+Applies to **new** paths and when **auditing** the tree. Pair with **migration** for renames/moves (update refs, verify, then remove old).
+
+**Skip** for chat-only help with no file changes.
+
+## Folders
+
+- **Lowercase** only.
+- **Prefer one word** (`test`, `core`, `errors`, `users`).
+- **Max two words** when one word is not enough (`api_gateway`, not three-word names).
+- Use **nesting** for meaning instead of long folder names: `test/errors/user/` not `test_errors_user/`.
+
+## Files (code & config stems)
+
+- **snake_case**, lowercase: `email.py`, `api_call.py`.
+- The **stem** (name without extension) must **not**:
+  - Repeat the **parent folder** name — as its own `_` segment, plural/singular (`tests`/`test`), or **glued** into another segment (`core/` + `coreapi_*` because `coreapi` starts with `core`).
+  - Embed a **language or format token** (`py`, `ts`, `yaml`, `json`, …) as if it were the extension.
+  - **Duplicate** a word (`core_coreapi`, `user_user_call`).
+
+| Bad | Why | Good (same folder) |
+|-----|-----|---------------------|
+| `actions/github_action.py` | folder name in file | `actions/github.py` |
+| `tests/test_sql.py` | folder name in file | `tests/sql.py` |
+| `errors/page_not_found_error.yaml` | folder name in file | `errors/page_not_found.yaml` |
+| `core/py_api_call.py` | format token in stem | `core/api_call.py` |
+| `core/core_coreapi_call.py` | folder + duplicate | `core/api_call.py` |
+| `core/coreapi_call.py` | glued folder token (`core` inside `coreapi`) | `core/api_call.py` |
+| `users/user_user_call.py` | duplicate word | `users/call.py` |
+
+If the only distinct part left is one word, use that: `tests/sql.py`, `actions/github.py`.
+
+**Tooling-mandated names** (e.g. `Dockerfile`, `Makefile`, `go.mod`) stay as required by the ecosystem; everything else follows this rule.
+
+## Documentation files
+
+- **Root / well-known agent docs:** **UPPERCASE** stem — `README.md`, `AGENTS.md`, `CLAUDE.md`, `DESIGN.md`, `CHANGELOG.md`, `LICENSE`, etc.
+- **Other documentation** (under `docs/`, `context/`, …): **lowercase** snake or single-word stems — `context/standards.md`, `docs/setup_guide.md`.
+
+Do not invent extra uppercase doc filenames unless they match a common convention the project already uses.
+
+## Structure: group related files
+
+When **two or more** files in the same directory are clearly a **set** (same prefix, same feature, or one exists only to support another), put them in a **subfolder** and drop redundant prefixes from stems.
+
+```text
+# Bad (siblings)
+test_user.py   test_ai.py   test_sql.py
+
+# Good
+test/user.py   test/ai.py   test/sql.py
+
+# Bad
+core_api.py   index.py   # index only serves core_api
+
+# Good
+core/api.py   core/index.py
+```
+
+**Prefer one file** when two small siblings would not stay clearer separate — e.g. `test/errors/user.py` instead of a folder for a single tiny module.
+
+## Structure: multi-level depth
+
+Use depth when it **models domains**, not to glue names into filenames.
+
+```text
+# Bad
+test/errors/user_email.py   test/errors/user_account.py
+
+# Good
+test/errors/user/email.py   test/errors/user/account.py
+```
+
+Add depth only when needed; **merge** into one file when a split folder would hold a single short module.
+
+## Checker script (run before claiming paths are valid)
+
+From project root:
+
+```bash
+python "%USERPROFILE%\.cursor\scripts\check_files_folders.py" .
+```
+
+One path (why it fails):
+
+```bash
+python "%USERPROFILE%\.cursor\scripts\check_files_folders.py" --explain core/coreapi_call.py
+```
+
+Use `--json` for machine-readable output. Fix reported paths; use **migration** for renames.
+
+**Agents:** Do not approve naming by eye alone — run the checker (or `--explain` on doubtful paths).
+
+## Existing tree vs new work
+
+- **Creating** files or folders: follow this rule.
+- **Existing** violations: run a quick audit (sample or full tree as appropriate), **list** offenders, and ask **explicit permission** before renames/moves/deletes.
+- After approval: use **migration** (inventory refs, `git mv`, update imports/config/docs, verify, remove old paths last).
+
+## Success
+
+- New paths match folder and file rules.
+- Related files grouped; depth justified or collapsed to one file.
+- Legacy fixes only with user approval and verified ref updates.

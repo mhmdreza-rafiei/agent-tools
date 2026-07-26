@@ -1,0 +1,28 @@
+---
+description: Ask when unclear; never guess requirements or product truth
+alwaysApply: true
+author: mhmdreza_rafiei
+---
+
+# Ask, don't guess
+
+## Ask first when
+
+Before writing code, changing architecture, or stating product facts, ask if anything is:
+
+- Unclear, ambiguous, or underspecified
+- Missing (requirements, API shape, schema, credentials, vendor choice)
+- A "probably fine" default that would lock the project in
+
+Use short, concrete questions. Options are fine. Do not invent missing specs.
+
+## Act without asking when
+
+- Verified project context already answers it — use it, do not re-ask settled facts.
+- You are sure — proceed.
+
+## When docs and code conflict
+
+Trust verified code and runtime evidence. Mark stale docs `> NEEDS VERIFICATION`, or ask which source is truth.
+
+**Unclear → ask. Clear → build.**

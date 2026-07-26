@@ -1,0 +1,51 @@
+---
+description: Read and update project context after every task when context exists
+alwaysApply: true
+author: mhmdreza_rafiei
+---
+
+# Project context
+
+Keep shared context accurate so stateless agents stay aligned.
+
+## When this applies
+
+The project has any of:
+
+- `context/` folder
+- `AGENTS.md`, `CLAUDE.md`, or `README.md` used as agent context
+- `docs/` or other docs agents rely on for architecture, setup, or decisions
+
+If none exist and the project is non-trivial, offer `/groundwork` to scaffold context.
+
+## Before work
+
+1. Read `AGENTS.md` if present.
+2. Read relevant `context/` files — start with `overview.md` and `architecture.md`.
+3. Check `context/memory/progress.md` for handoff state when resuming work.
+
+## After every task or action
+
+Before you finish, update context when the task changed anything a future agent needs:
+
+- Architecture, boundaries, folder structure, or data flow
+- Standards, patterns, or conventions
+- Plan, milestones, or decisions
+- Dependencies, integrations, or build steps
+- Current state, blockers, or follow-ups
+
+Skip updates for trivial changes with no lasting impact (typos, comment-only edits, pure formatting).
+
+## How to update
+
+| Target | Action |
+|--------|--------|
+| `context/` (any create, edit, add, delete) | Read and follow the **groundwork** skill. Treat every change as `/groundwork update`: merge and improve — never make context thinner or vaguer. |
+| `context/memory/progress.md` | Update for session handoff when work spans sessions or leaves follow-ups. |
+| Other project docs | Update only affected files. Do not duplicate Build, Skills, or References outside `AGENTS.md`. |
+
+## Ground rules
+
+1. Verify against code before encoding — trust code over stale docs.
+2. Mark unverified claims as `> NEEDS VERIFICATION`.
+3. Preserve human edits; deepen and correct, do not clobber.

@@ -1,0 +1,91 @@
+---
+description: Git setup, Conventional Commits, backups, and commit/push only with user permission
+alwaysApply: true
+author: mhmdreza_rafiei
+---
+
+# Git workflow (all projects)
+
+## When this rule applies
+
+Follow this rule for **project work** (code, files, scaffolding, installs, git operations).
+
+**Skip** for general chat, casual talk, image generation, and **help-only** sessions (questions, how-to, Cursor/docs) with no project changes.
+
+## Git must exist first
+
+- If the directory is **not** a git repo (`git rev-parse --is-inside-work-tree` fails), **stop** substantive project work and ask the user to initialize or clone git first (`git init`, remote, etc.).
+- When **creating a new project**, offer `git init` (and remote if they want) before meaningful changes; confirm setup before continuing.
+
+## User preference: commit vs push
+
+Early in project work (or when unknown), ask what they want when work is done:
+
+- **Commit only** — local checkpoint; **never push** unless they later ask.
+- **Push only** — only if commits already exist and they explicitly want remote updated (still confirm).
+- **Both** — commit then push when they approve at end of task.
+- **Neither** — no git writes without a later explicit request.
+
+Respect the latest answer for the session; re-ask if scope changes (e.g. they switch to “commit only” for a restore point).
+
+## Conventional Commits (required for new commits)
+
+Format ([spec](https://www.conventionalcommits.org/en/v1.0.0/#specification)):
+
+```
+<type>[optional scope][optional !]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+- Types: `feat`, `fix`, plus `build`, `chore`, `ci`, `docs`, `style`, `refactor`, `perf`, `test`, `revert`, etc.
+- `feat` = new feature; `fix` = bug fix. Breaking: `!` before `:` and/or `BREAKING CHANGE: <description>` footer.
+- Title: lowercase type, imperative short description after colon and space.
+- Body: blank line after title; explain **why** when helpful.
+
+```text
+feat(api): add pagination to list endpoint
+
+fix: prevent race when canceling in-flight requests
+
+docs: correct CHANGELOG spelling
+```
+
+Do **not** commit files that likely contain secrets (`.env`, credentials). Warn if asked.
+
+## Existing history that does not conform
+
+If the repo has commits whose messages **do not** match Conventional Commits:
+
+1. Report which commits look non-conforming (sample or full list if small).
+2. Ask **explicit permission** before rewriting history (`rebase`, `commit --amend`, filter-repo, etc.).
+3. **Never** rewrite commits without permission.
+
+## Backup before risky git operations
+
+Before **any** operation that can delete or rewrite history (rebase, reset, amend, force push, history edit, squash):
+
+1. Create a **full copy** of the `.git` directory (e.g. sibling `.git-backup-YYYYMMDD-HHMMSS` or user-chosen path).
+2. Confirm backup succeeded before proceeding.
+3. If something goes wrong, restore by replacing `.git` from the backup (with user awareness).
+
+Routine `git add` + `git commit` on a clean tree does not require a `.git` backup unless combined with history rewrite.
+
+## End of task
+
+After finishing work that changed the project:
+
+1. Check `git status` — uncommitted changes or unpushed commits?
+2. If yes, remind the user and ask permission per their preference (**commit**, **push**, **both**, or **skip**).
+3. **Commit only** → commit locally; **do not push**.
+4. **Push** or **both** → push only after explicit approval for that action.
+5. Never use destructive git (force push to `main`/`master`, hard reset) unless the user explicitly requests it; warn on force push to default branch.
+
+## Safety (always)
+
+- Never change `git config`.
+- Never skip hooks (`--no-verify`) unless the user explicitly requests it.
+- Do not push unless the user asked for push or “both”.
+- Prefer new commits over amend unless amend rules in user rules apply and HEAD is yours unpushed work.
