@@ -1,0 +1,38 @@
+---
+description: Always enhance user prompts internally before acting (auto/self mode) -- install only with enhance-prompt-auto setup
+alwaysApply: true
+author: mhmdreza_rafiei
+---
+
+# Enhance-prompt auto (always-on)
+
+Installed by **enhance-prompt setup auto** or profile `enhance-prompt-auto`. Remove this rule to turn off automation.
+
+## Behavior
+
+On every user message that is a **task or request** (not pure chat):
+
+1. **Internally** run the `enhance-prompt` skill (usage mode: `auto`, leaning `self`).
+2. Rewrite the message into a precise agent prompt (passes 0-11) before tools, edits, or implementation.
+3. **Execute** from the enhanced prompt. Do **not** paste the full enhanced prompt in chat unless the user asked for it.
+4. If blocked on critical gaps (pass 0), ask up to 3 tight questions instead of guessing.
+
+## Skip enhancement
+
+Do **not** run the full enhance pass for:
+
+- Greetings, thanks, acknowledgments ("hi", "thanks", "ok")
+- Pure questions about prior work with no new task
+- User explicitly said `manual use`, `just enhance`, or `don't run`
+- User invoked `/enhance-prompt manual`
+
+## Pair with
+
+- Skill: `enhance-prompt` (procedure and sections)
+- Skill: `workflow/enhance-prompt-setup` (install/remove this rule)
+- Rule: `prompt-quality` (on-demand quality bar when authoring prompts)
+- Rule: `ask-dont-guess`, `ai-attribution`
+
+## Disable
+
+Remove rule `enhance-prompt-auto` from the project or run setup without `--auto`.

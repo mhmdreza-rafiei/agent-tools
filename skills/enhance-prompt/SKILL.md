@@ -297,6 +297,23 @@ If invoked as `--refine` (or the user is re-enhancing a prompt they already enha
 
 Without `--refine`, each enhance is stateless (current behavior).
 
+## Setup (project or global)
+
+To wire enhance-prompt and related artifacts into a project, use **`/enhance-prompt-setup`** or the setup skill/script -- do not hand-copy files.
+
+| Setup | Command | Result |
+|-------|---------|--------|
+| Normal | `/enhance-prompt-setup` | Skills + rules; user invokes enhance manually |
+| Auto | `/enhance-prompt-setup auto` | Same + `enhance-prompt-auto` rule (always enhance before acting) |
+| Global | add `global` | `agentry add -g` into `~` for all projects |
+
+```bash
+node scripts/setup-enhance-prompt/run.mjs . --auto
+agentry add profile enhance-prompt-auto mhmdreza-rafiei/agent-tools -g -a cursor -y
+```
+
+Profiles: `enhance-prompt` (normal), `enhance-prompt-auto` (automation). See `workflow/enhance-prompt-setup` for full procedure.
+
 ## Always-on mode
 
 If the user asks to enhance every chat / every prompt:

@@ -132,14 +132,14 @@ artifacts by `id`; scripts are folders with a `README.md` + runnable file.
   `ai/`, `qa/`, `docs/`, `dx/` + flat singletons `security-auditor`,
   `product-manager`, `agent-organizer`.
 - **skills/** — `context/` (10 context-system skills), `workflow/` (spec,
-  estimate, triage, release, scaffold), `audit/` (a11y) + flat `enhance-prompt`.
-- **rules/** — `global/` (8 always-on rules: ask-dont-guess, files-folders-structure,
-  git-workflow, migration, project-context, caveman, ponytail, ai-attribution),
-  `code/` (code-style, testing, error-handling, performance, accessibility)
-  + flat domain rules (`security`, `api-design`, `observability`, `prompt-quality`).
-- **scripts/** — `naming/` (the files-folders checker the rule references) +
-  catalog-maintenance scripts (lint-artifacts, validate-profiles, stats,
-  audit-catalog, check-compat, dedupe, gen-index, release, sync, onboard, backup).
+  estimate, triage, release, scaffold, enhance-prompt-setup), `audit/` (a11y)
+  + flat `enhance-prompt`.
+- **rules/** — `global/` (9 always-on rules: ask-dont-guess, files-folders-structure,
+  git-workflow, migration, project-context, caveman, ponytail, ai-attribution,
+  enhance-prompt-auto), `code/` (code-style, testing, error-handling, performance,
+  accessibility) + flat domain rules (`security`, `api-design`, `observability`,
+  `prompt-quality`).
+- **scripts/** — `naming/`, `setup-enhance-prompt/`, catalog-maintenance scripts.
 
 ## License
 
@@ -157,3 +157,13 @@ catalog. Author for all artifacts: `mhmdreza_rafiei`.
 - For renames/moves: use `git mv`, update references, verify, then remove old.
 - Run `node scripts/lint-artifacts/run.mjs` and `node scripts/check-compat/run.mjs`
   before committing to catch frontmatter, extension, or compatibility drift.
+
+## Prompt enhancement
+
+| Skill | When |
+|-------|------|
+| enhance-prompt | `/enhance-prompt` or `enhance-prompt self use` |
+| workflow/enhance-prompt-setup | `/enhance-prompt-setup` |
+
+Setup: `node scripts/setup-enhance-prompt/run.mjs . --auto` or profile `enhance-prompt-auto`.
+Profiles: `enhance-prompt` (manual), `enhance-prompt-auto` (always enhance before acting).

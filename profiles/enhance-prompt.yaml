@@ -1,0 +1,18 @@
+name: enhance-prompt
+description: Prompt enhancement stack -- enhance-prompt skill, setup skill, prompt-quality rule, and prompt-architect agent (manual invoke).
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  skills:
+    - id: enhance-prompt
+    - id: workflow/enhance-prompt-setup
+  agents:
+    - id: ai/prompt-architect
+  rules:
+    - id: ask-dont-guess
+    - id: ai-attribution
+    - id: prompt-quality
