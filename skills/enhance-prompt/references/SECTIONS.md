@@ -152,3 +152,15 @@ post-work summaries.
 Write a summary anyone can follow: endpoints added/removed (with shapes),
 how to verify (tests + manual repro), anything still open.
 ```
+
+## Usage modes (delivery, not prompt shape)
+
+How the skill delivers the enhanced prompt -- independent of section layout:
+
+| Mode | User says | Agent does |
+|------|-----------|------------|
+| `auto` | `/enhance-prompt` (default) | Enhance, then execute if task is actionable in open workspace; else emit prompt |
+| `manual` | `enhance-prompt manual use` | Emit copy-ready prompt only; do not execute |
+| `self` | `enhance-prompt self use` | Enhance internally, execute, reply with results only (no prompt dump unless asked) |
+
+In `self` mode, the enhanced prompt is the agent's internal plan -- not shown in chat.

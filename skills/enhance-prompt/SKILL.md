@@ -5,6 +5,8 @@ description: >
   or when always-on prompt enhancement is enabled for the session.
   Rewrites casual or vague chat into precise, portable agent instructions
   without injecting workspace paths, stack, or session-local context.
+  Supports usage modes: auto (detect execute vs emit), manual (emit only),
+  self (enhance internally and execute without showing the prompt).
   Preserves user-stated contracts; ranks related skills; asks clarifying /
   mode / better-decision questions when needed; ends with an after-finish summary instruction.
 author: mhmdreza_rafiei
@@ -15,6 +17,59 @@ author: mhmdreza_rafiei
 Rewrite the user’s message into a precise, portable agent prompt. **Enhance = clarify and structure — never strip user-stated details that affect accuracy.** Accuracy first; tokens second (same or better meaning, fewer tokens).
 
 Do **not** invent requirements or paste workspace-local paths/stack. For shape and examples, open [references/TEMPLATE.md](references/TEMPLATE.md) and [references/SECTIONS.md](references/SECTIONS.md).
+
+## Usage modes
+
+The user picks how the enhanced prompt is delivered. Parse from invocation:
+
+| Invocation | Mode | Behavior |
+|------------|------|----------|
+| `/enhance-prompt` or `enhance-prompt` (no suffix) | `auto` | Default. Run passes 0-11; then decide (see auto rules below). |
+| `enhance-prompt auto` / `enhance-prompt auto use` | `auto` | Same as default. |
+| `enhance-prompt manual` / `enhance-prompt manual use` | `manual` | Emit the enhanced prompt in chat only. Do **not** execute the task. |
+| `enhance-prompt self` / `enhance-prompt self use` | `self` | Enhance internally, then **execute** the task. Do **not** paste the full enhanced prompt in chat unless the user also asked to show it (e.g. "and show me the prompt"). |
+
+Aliases: `enhance and use` / `enhance then do it` -> `self`. `just enhance` / `enhance only` -> `manual`.
+
+### Auto mode (default)
+
+After enhancing, choose **execute** vs **emit**:
+
+**Execute internally** (same chat behavior as `self`) when **all** are true:
+
+- The task is actionable in the **current** workspace (files, repo, or tools the agent can touch now).
+- The user did not ask for a portable prompt for another project, agent, or session.
+- The user did not say "only enhance", "don't run", "manual", or equivalent.
+- No blocking open questions remain (pass 0).
+
+**Emit prompt only** (same as `manual`) when **any** is true:
+
+- User wants a prompt to paste elsewhere ("for Claude", "for another repo", "copy-ready").
+- Task targets a workspace the agent cannot act in.
+- User said enhance-only / manual / do not execute.
+- Blocking ambiguities need answers before work can start.
+
+When auto chooses execute, follow **self** output rules (no full prompt dump).
+
+### Manual mode
+
+- Deliver questions-first (pass 0) **or** one copy-ready enhanced prompt in chat.
+- Do not run tools, edit files, or start implementation unless the user sends a follow-up to execute.
+- Optional one-line note: "Enhanced only (manual mode) -- say `self use` or send the task again to execute."
+
+### Self mode
+
+- Run passes 0-11 **internally** (or questions-first if blocked).
+- If not blocked: execute the enhanced prompt immediately -- tools, edits, verification.
+- **Do not** post the full enhanced prompt in chat. Do not open with "here is the enhanced prompt".
+- In the final reply: outcome summary only (what changed, how to verify). Same style as **After you finish**.
+- Show the enhanced prompt **only** if the user explicitly asked (e.g. "self use and show the prompt", "give me the prompt too").
+
+### Mode + other flags
+
+- `--refine` (pass 11) composes with any mode.
+- Depth dial (`compact` | `standard` | `full`) is independent of usage mode.
+- `always-on` (see below) behaves like **auto**, leaning toward execute when the message is a task in the open workspace.
 
 ## Procedure
 
@@ -258,6 +313,15 @@ Always-on: rewrite the user message into a better agent prompt **before** acting
 
 ## Output
 
-1. Either questions-first (pass 0) **or** one copy-ready enhanced prompt — with the new sections when applicable (Acceptance criteria, Do not, Destructive actions, Delegation plan, Before you start, split Open questions) + **Related artifacts** + **After you finish**.
-2. Optional brief chat-only enhancer changelog outside that block (required under `--refine` to note the delta).
-3. Do not announce skill usage unless the user asks.
+Depends on **usage mode** (see above):
+
+| Mode | Chat output |
+|------|-------------|
+| `manual` | Questions-first **or** full copy-ready enhanced prompt (all sections when applicable) + optional brief changelog |
+| `self` | Questions-first if blocked; else **no** full prompt -- only execution results + after-finish summary (unless user asked to see the prompt) |
+| `auto` | Follow `manual` or `self` per auto rules |
+
+Enhanced prompt sections (when emitted): Acceptance criteria, Do not, Destructive actions, Delegation plan, Before you start, split Open questions, Related artifacts, After you finish.
+
+- Optional brief chat-only enhancer changelog outside the copy-ready block (required under `--refine` to note the delta; omit in `self` unless user asked for the prompt).
+- Do not announce skill usage unless the user asks.
