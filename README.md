@@ -187,7 +187,9 @@ agent-tools/
 │   └── <name>.yaml
 ├── scripts/                    ← one folder per use-case
 │   └── <name>/{README.md, run.mjs}
-└── docs/                       ← repo docs
+├── docs/                       ← repo docs
+├── master/                     ← default pack: PDFs for humans, context/ for AI
+└── releases/                   ← master.zip for unzip-and-use
 ```
 
 Every agent, rule, and skill frontmatter includes `author: mhmdreza_rafiei`.
@@ -228,7 +230,17 @@ node scripts/release/run.mjs             # bump version + changelog + tag
 node scripts/sync/run.mjs ../my-app      # install catalog into a target
 node scripts/onboard/run.mjs             # print contributor onboarding
 node scripts/backup/run.mjs              # bundle the catalog for restore
+node scripts/workbook/run.mjs            # human PDFs + pack master.zip
 ```
+
+## Master (default pack, not an artifact)
+
+`master/` is a default operating pack for any person or team. It is **not** an agentry skill, agent, rule, or profile.
+
+- **Root:** short PDFs you open to stay on track (`start.pdf`, `checklist.pdf`, `roadmap.pdf`, …).
+- **`context/`:** markdown for the AI (`AGENTS.md`, workflows, rules, practices).
+
+**Install without cloning this repo:** download [`releases/master.zip`](releases/master.zip) and unzip. Rebuild with `node scripts/workbook/run.mjs`.
 
 ## License
 

@@ -11,12 +11,14 @@ the catalog, see [README.md](README.md).
 
 ```text
 agent-tools/
-├── agents/      ← one .mdc file per agent, flat or one category deep
-├── skills/      ← one folder per skill, with SKILL.md (+ optional references/)
-├── rules/       ← one .mdc file per rule, flat or one category deep (global/, code/)
-├── profiles/    ← one .yaml file per install bundle
-├── scripts/     ← one folder per use-case, with README.md + runnable files
-└── docs/        ← repo docs (proposals, etc.)
+├── agents/           ← one .mdc file per agent, flat or one category deep
+├── skills/           ← one folder per skill, with SKILL.md (+ optional references/)
+├── rules/            ← one .mdc file per rule, flat or one category deep (global/, code/)
+├── profiles/         ← one .yaml file per install bundle
+├── scripts/          ← one folder per use-case, with README.md + runnable files
+├── docs/             ← repo docs (proposals, etc.)
+├── master/           ← default human PDFs + context/ for AI; not an agentry artifact
+└── releases/         ← master.zip (download this, not the whole repo)
 ```
 
 ## Agentry compatibility (non-negotiable)
@@ -140,6 +142,7 @@ artifacts by `id`; scripts are folders with a `README.md` + runnable file.
   accessibility) + flat domain rules (`security`, `api-design`, `observability`,
   `prompt-quality`).
 - **scripts/** — `naming/`, `setup-enhance-prompt/`, catalog-maintenance scripts.
+- **master/** — default pack for anyone (not a per-person fork). Root = human PDFs. `master/context/` = AI files (`AGENTS.md`, workflows, rules). Download `releases/master.zip`. Rebuild with `node scripts/workbook/run.mjs`.
 
 ## License
 
