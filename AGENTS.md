@@ -146,7 +146,9 @@ artifacts by `id`; scripts are folders with a `README.md` + runnable file.
 - **master/** — default pack for anyone (not a per-person fork). Root = human
   PDFs (`start`, `checklist`, `roadmap`, `new`, `inherited`, `research`,
   `debug`, `review`, `rules`). `master/context/` = AI files. Download
-  `releases/master.zip`. Rebuild with `node scripts/workbook/run.mjs`.
+  `releases/master.zip`. Rebuild with `node scripts/workbook/run.mjs`. GitHub's
+  Releases sidebar is published from `v*` tags
+  (see `.github/workflows/github-release.yml`), not from the `releases/` folder.
 - **docs/sandbox/demo/** — living catalog check (zero-dep Node task API + UI).
   Run `node docs/sandbox/demo/check.js`.
 

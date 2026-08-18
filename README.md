@@ -240,7 +240,7 @@ node scripts/workbook/run.mjs            # human PDFs + pack master.zip
 - **Root:** short PDFs you open to stay on track (`start`, `checklist`, `roadmap`, `new`, `inherited`, `research`, `debug`, `review`, `rules`).
 - **`context/`:** markdown for the AI (`AGENTS.md`, workflows, rules, practices). Catalog ids to load are in `context/AGENTS.md`.
 
-**Install without cloning this repo:** download [`releases/master.zip`](releases/master.zip) and unzip. Rebuild with `node scripts/workbook/run.mjs`.
+**Install without cloning this repo:** use a [GitHub Release](https://github.com/mhmdreza-rafiei/agent-tools/releases) and download `master.zip`, or take [`releases/master.zip`](releases/master.zip) from the tree. Unzip and open the PDFs. Rebuild with `node scripts/workbook/run.mjs`. The `releases/` folder is only the built zip — GitHub's Releases sidebar comes from version tags (`v*`), not from that folder.
 
 ## License
 

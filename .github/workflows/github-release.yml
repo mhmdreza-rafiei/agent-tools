@@ -1,0 +1,27 @@
+name: github-release
+
+# GitHub's Releases sidebar only lists Releases created from tags, not a
+# folder named releases/. Push a v* tag to publish master.zip there.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          test -f releases/master.zip
+          gh release create "${GITHUB_REF_NAME}" \
+            releases/master.zip \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes \
+            --repo "${GITHUB_REPOSITORY}"
