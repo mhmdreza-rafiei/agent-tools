@@ -118,3 +118,28 @@ These are defaults, not a vendor lock-in:
 | Git | Conventional Commits; no force-push to default branch | Recoverable history |
 
 Swap tools; keep the layers.
+
+## 9. Incident response and debug workflows
+
+When production fails or a bug is reported:
+
+- **Repro first.** Do not act on a second-hand report. Run the failing test or command yourself.
+- **Root cause, not symptom.** Error message is often a symptom. Trace the state path back to where the bad data entered.
+- **Fix shared cause once.** One guard in a shared function beats N patches in callers.
+- **Write the test first.** Encode the bug as a failing test; confirm the fix makes it pass.
+- **Prevent recurrence.** Add a check (test, lint, assertion) that would have caught this before production.
+
+See `workflow/debug.md` for the full checklist.
+
+## 10. Review and audit workflows
+
+When reviewing a PR or architecture:
+
+- **Read the spec first.** What was the acceptance criteria? Is the diff addressing it?
+- **Check scope.** Is everything in the diff actually required by the spec? Or is there scope creep?
+- **Verify tests.** Does the new code have a test? Does the test actually exercise the new behavior? (Not just "runs without error.")
+- **Security boundaries.** User input validated? Secrets safe? Auth checks in place?
+- **Focus on safety, not style.** Report critical issues (security, broken acceptance, missing tests), not code preferences.
+- **Human decides.** You are a second reader; the human approves the merge.
+
+See `workflow/review.md` for the full checklist.

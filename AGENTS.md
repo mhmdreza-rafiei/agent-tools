@@ -132,7 +132,8 @@ artifacts by `id`; scripts are folders with a `README.md` + runnable file.
 
 - **agents/** — `frontend/`, `backend/`, `languages/`, `devops/`, `data/`,
   `ai/`, `qa/`, `docs/`, `dx/` + flat singletons `security-auditor`,
-  `product-manager`, `agent-organizer`.
+  `product-manager`, `agent-organizer`. Incident command vs ops deep-dive:
+  `devops/incident-responder` and `devops/devops-incident-responder`.
 - **skills/** — `context/` (10 context-system skills), `workflow/` (spec,
   estimate, triage, release, scaffold, enhance-prompt-setup), `audit/` (a11y)
   + flat `enhance-prompt`.
@@ -142,7 +143,12 @@ artifacts by `id`; scripts are folders with a `README.md` + runnable file.
   accessibility) + flat domain rules (`security`, `api-design`, `observability`,
   `prompt-quality`).
 - **scripts/** — `naming/`, `setup-enhance-prompt/`, catalog-maintenance scripts.
-- **master/** — default pack for anyone (not a per-person fork). Root = human PDFs. `master/context/` = AI files (`AGENTS.md`, workflows, rules). Download `releases/master.zip`. Rebuild with `node scripts/workbook/run.mjs`.
+- **master/** — default pack for anyone (not a per-person fork). Root = human
+  PDFs (`start`, `checklist`, `roadmap`, `new`, `inherited`, `research`,
+  `debug`, `review`, `rules`). `master/context/` = AI files. Download
+  `releases/master.zip`. Rebuild with `node scripts/workbook/run.mjs`.
+- **docs/sandbox/demo/** — living catalog check (zero-dep Node task API + UI).
+  Run `node docs/sandbox/demo/check.js`.
 
 ## License
 

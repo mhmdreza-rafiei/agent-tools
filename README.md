@@ -11,9 +11,9 @@ Works with Cursor, Claude Code, Codex, OpenCode, and 70+ more.
 [![stars](https://img.shields.io/github/stars/mhmdreza-rafiei/agent-tools?style=social)](https://github.com/mhmdreza-rafiei/agent-tools)
 [![agentry](https://img.shields.io/badge/agentry-compatible-38bdf8?style=flat)](https://github.com/mhmdreza-rafiei/agentry)
 [![agents](https://img.shields.io/badge/agents-46-38bdf8?style=flat)](agents)
-[![skills](https://img.shields.io/badge/skills-17-38bdf8?style=flat)](skills)
-[![rules](https://img.shields.io/badge/rules-17-38bdf8?style=flat)](rules)
-[![profiles](https://img.shields.io/badge/profiles-9-38bdf8?style=flat)](profiles)
+[![skills](https://img.shields.io/badge/skills-18-38bdf8?style=flat)](skills)
+[![rules](https://img.shields.io/badge/rules-18-38bdf8?style=flat)](rules)
+[![profiles](https://img.shields.io/badge/profiles-11-38bdf8?style=flat)](profiles)
 
 </div>
 
@@ -39,7 +39,7 @@ agentry add profile mhmdreza-rafiei/agent-tools fullstack
 
 ## What's in the catalog
 
-**101 artifacts** — 46 agents, 17 skills, 17 rules, 9 profiles, 12 scripts.
+**107 artifacts** — 46 agents, 18 skills, 18 rules, 11 profiles, 14 scripts.
 Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 
 ### Agents (46)
@@ -237,8 +237,8 @@ node scripts/workbook/run.mjs            # human PDFs + pack master.zip
 
 `master/` is a default operating pack for any person or team. It is **not** an agentry skill, agent, rule, or profile.
 
-- **Root:** short PDFs you open to stay on track (`start.pdf`, `checklist.pdf`, `roadmap.pdf`, …).
-- **`context/`:** markdown for the AI (`AGENTS.md`, workflows, rules, practices).
+- **Root:** short PDFs you open to stay on track (`start`, `checklist`, `roadmap`, `new`, `inherited`, `research`, `debug`, `review`, `rules`).
+- **`context/`:** markdown for the AI (`AGENTS.md`, workflows, rules, practices). Catalog ids to load are in `context/AGENTS.md`.
 
 **Install without cloning this repo:** download [`releases/master.zip`](releases/master.zip) and unzip. Rebuild with `node scripts/workbook/run.mjs`.
 

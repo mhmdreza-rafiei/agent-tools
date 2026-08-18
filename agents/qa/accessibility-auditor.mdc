@@ -26,11 +26,29 @@ author: mhmdreza_rafiei
 
 ## Approach
 
-1. **Automated pass** - axe-core / lighthouse to find the obvious violations.
-2. **Keyboard pass** - tab through the flow; check every interactive element is reachable and operable without a mouse.
-3. **Screen-reader pass** - listen to the announcement order; check labels, roles, and live regions.
-4. **Contrast pass** - all text and meaningful graphics meet AA (4.5:1 text, 3:1 large/UI).
-5. **Motion pass** - any non-essential animation honors `prefers-reduced-motion`.
+**Detect available tools first.** Do not require a tool that is not installed. Fall through gracefully.
+
+1. **Automated pass** — run axe-core or Lighthouse if a browser/Node environment is available.
+   - No browser? Skip automated; proceed to manual checks below. Note what was skipped.
+2. **Keyboard pass** — review the source for: tab order, `tabindex` misuse, focus styles (`outline: none` without replacement = blocker).
+3. **ARIA pass** — scan for: missing `aria-label`/`aria-labelledby` on icon controls; redundant roles; live regions for dynamic updates.
+4. **Labels pass** — every `<input>`, `<select>`, `<textarea>` has a `<label for>` or `aria-labelledby`. Placeholder-only = blocker.
+5. **Contrast pass** — estimate against known hex values; flag uncertain pairs as `> NEEDS VERIFICATION` if a tool is needed to confirm.
+6. **Landmarks pass** — `<header>`, `<main>`, `<footer>`, `<nav>` present and correctly nested; exactly one `<main>`.
+7. **Motion pass** — flag any CSS animation not wrapped in `@media (prefers-reduced-motion: reduce)`.
+
+### Manual-only checklist (when no browser tool is available)
+
+Read the source HTML/JSX and check each row:
+
+| Check | What to grep for | Blocker? |
+|-------|-----------------|---------|
+| Missing label | `<input` without `<label for=` or `aria-labelledby` | Yes |
+| Placeholder-as-label | `placeholder=` with no `<label>` | Yes |
+| Focus removed | `outline: none` or `outline: 0` without `:focus-visible` replacement | Yes |
+| Icon-only button | `<button>` containing only an `<img>` or SVG without `aria-label` | Yes |
+| `role` on native element | `role="button"` on `<button>` | Nit |
+| `aria-live` redundant | `role="status"` + `aria-live="polite"` together | Nit |
 
 ## Output
 

@@ -36,3 +36,10 @@ If they say "build it," switch to `new.md` or `inherited.md` and require `../che
 ### 5. Close with a next action they can copy
 
 One of: first slice if they want it in a repo; a command to run; what this is blocked on.
+
+## Catalog load
+
+- Skills: `enhance-prompt` if the question will become an implementation prompt.
+- Rules: `global/ask-dont-guess`, `prompt-quality`.
+- Do not load implementer agents until they switch to `new.md` or `inherited.md`.
+

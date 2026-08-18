@@ -1,56 +1,79 @@
 # Roadmap
 
-Do these in order. Each rung assumes the one above it is already true. Humans use `roadmap.pdf`.
+Do these in order. Each rung assumes all above it are true. Humans use `roadmap.pdf`. This is a maturity curve, not a sprint checklist.
 
-## Rung 0 — Human loop (today)
+## Rung 0 — Human loop (baseline)
 
-- Git on every real project
-- One standing file: `AGENTS.md` with how to install, run, and test
-- Unclear product facts → ask; never invent
-- Checklist before non-trivial AI work
-- Human review of every merge
+Already true when you start using this pack.
 
-Stop here if they only chat with AI.
+- **Git on every real project.** No git = no code writes.
+- **One standing file:** `AGENTS.md` (or `CLAUDE.md`) with build, test, run, and conventions.
+- **Unclear product facts → ask.** Never invent users, metrics, stack, or roadmap.
+- **Checklist before non-trivial AI work.** Spec = contract, not a nice-to-have.
+- **Human review of every merge.** No AI can merge. (Escalation and diffs are fine; signing off is not.)
 
-## Rung 1 — Spec-first
+Stop here if this team only uses AI for chat, explanations, or research.
 
-- Non-trivial work gets a spec (outcome, in/out, constraints, copy-pasteable checks)
-- Implement against the spec; review against the spec
-- Diffs small enough to read in one sitting
+## Rung 1 — Spec-driven
+
+Move here when code output quality or team size starts to matter.
+
+- **Non-trivial work (>1 file) gets a written spec:** outcome, acceptance criteria (copy-pasteable commands), constraints, scope in/out.
+- **Implement against spec; review against spec.** If the diff does not address the spec, it is not done.
+- **Diffs small enough to review in one sitting.** If a human cannot read it in 15 minutes, split into smaller specs.
+- **Agent runs verification commands** (from the spec) before claiming done. Paste output or confirm exit code.
 
 ## Rung 2 — Context pack
 
-- `AGENTS.md` stays short (conventions + commands)
-- `context/` holds architecture, progress, decisions when the repo is touched twice
-- Update context after work that changes structure or truth; mark stale claims
+Move here when the repo is touched more than twice, or when onboarding a second person.
 
-## Rung 3 — Skills and rules as procedures
+- **`AGENTS.md` stays short:** build, test, lint, run commands + naming/style gotchas only.
+- **`context/` for architecture, decisions, progress, and handoff.** Update after work that changes structure, data model, or standing practices.
+- **Distinguish transient notes** (session logs, exploration) from standing context. Use a `memory/` folder or cleanup after the session.
+- **Mark stale claims** with `> NEEDS VERIFICATION` instead of silently overwriting.
 
-- Extract a skill or rule when a motion repeats twice
-- Trigger text = when to use, not a recap of how to code
-- Install per project so repos do not inherit a random global soup
+## Rung 3 — Skills and rules as code
 
-## Rung 4 — Verification loops
+Move here when you extract a reusable procedure twice in the same team.
 
-- Agent must run the project's test/lint commands before claiming done
-- One new runnable check per non-trivial behavior
+- **Extract a skill or rule** (from catalog `G:/Projects/agent-tools/skills/` or `rules/`) when a motion or check repeats across projects.
+- **Trigger text = "when to use this,"** not a code summary. Keep the description one sentence.
+- **Install per project** (e.g. via agentry profile). Do not create a global random soup of skills.
+- **One skill = one job.** If a skill straddles five different categories, split it.
 
-## Rung 5 — Review agents
+See catalog for structure: `skills/<category>/<name>/SKILL.md`, `rules/<name>.mdc`.
 
-- Second agent behind branch protection
-- Mandate: scope, security, missed tests — not formatter nits
-- Humans still merge
+## Rung 4 — Verification loops (close the loop)
+
+Move here when a bug escapes to production or when you have tests and lints in place.
+
+- **Agent must run the project's test/lint commands** before claiming done. This is not optional.
+- **One new runnable check per non-trivial behavior** (test, lint, custom script). For a 20-line function, an assert or one small test counts. For a feature, a test that exercises the new path.
+- **Encode your gotchas in checks, not in prompts.** "Run `./scripts/check-security.sh before committing" is in code; reminders in the spec are forgotten.
+
+## Rung 5 — Second-reader agents
+
+Move here when you have branch protection and a growing PRs/rework ratio.
+
+- **Second agent (e.g. `code-reviewer.mdc`) behind branch protection** or before merge.
+- **Mandate: scope creep, security, missed tests, and broken acceptance.** Not formatter nits, not code style, not "I would have written it differently."
+- **Humans still merge.** The agent is a second pair of eyes; the human is the decider.
+- **Track improvements:** did this catch bugs the implementer missed? Is rework dropping?
 
 ## Rung 6 — Parallel agents (only with specs)
 
-- Split tasks that do not share files
-- Isolated worktrees / branches
-- Handoff file when a session gets long
-- Do not run ten agents on a vague prompt
+Move here when your codebase is large and specs are reliable.
 
-## Not yet
+- **Split tasks that touch non-overlapping files.** One agent per spec, per file set.
+- **Isolated git branches / worktrees.** Do not merge all branches at once.
+- **Handoff file** (`context/handoff.md` or spec list) when a session gets long.
+- **Do not run ten agents on a vague prompt.** The more agents, the clearer the spec must be.
 
-- Auto-merge
-- Skipping permissions globally
+## Rung 7+ (not yet)
+
+Research frontier, not production advice.
+
+- Auto-merge agents
+- Skipping permissions ("dangerously-skip-verification")
 - Generating a new architecture for every inherited repo
-- Measuring success by number of agent messages
+- Measuring productivity by agent message count (misleading per Faros 2026 telemetry)

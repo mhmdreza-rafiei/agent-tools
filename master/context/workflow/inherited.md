@@ -55,3 +55,11 @@ Bug fix: find the shared function and fix once.
 - Run the commands you claimed
 - Keep the diff small enough to review this session
 - Do not rewrite git history unless they explicitly asked and a backup of `.git` exists
+
+## Catalog load
+
+- Agents: `dx/codebase-onboarder` first; then `backend/full-stack-developer` or the stack specialist; `qa/code-reviewer` before merge.
+- Skills: `workflow/spec`, `context/architect`, `context/groundwork`.
+- Rules: globals above plus `code/testing`.
+- Profile: `fullstack`.
+

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task List — Agent-Tools Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    header { text-align: center; margin-bottom: 2rem; }
+    h1 { font-size: 1.75rem; font-weight: 700; }
+    p.subtitle { color: #555; margin-top: 0.25rem; font-size: 0.9rem; }
+
+    main {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.12);
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    form { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
+    }
+    input[type="text"]:focus {
+      outline: 2px solid #0066cc;
+      outline-offset: 1px;
+    }
+
+    button[type="submit"] {
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover { background: #0052a3; }
+    button[type="submit"]:focus-visible {
+      outline: 2px solid #003d80;
+      outline-offset: 2px;
+    }
+
+    #status[aria-live="polite"] {
+      font-size: 0.85rem;
+      color: #c00;
+      min-height: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    ul { list-style: none; }
+    li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.95rem;
+    }
+    li:last-child { border-bottom: none; }
+
+    #empty { color: #999; font-size: 0.9rem; text-align: center; padding: 1rem 0; }
+
+    footer {
+      margin-top: 2rem;
+      color: #888;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Task List</h1>
+    <p class="subtitle">Agent-Tools catalog sandbox demo</p>
+  </header>
+
+  <main>
+    <form id="task-form" novalidate>
+      <label for="task-input" class="sr-only">New task</label>
+      <input
+        type="text"
+        id="task-input"
+        name="task"
+        placeholder="Add a task…"
+        autocomplete="off"
+        aria-required="true"
+        maxlength="200"
+      />
+      <button type="submit">Add</button>
+    </form>
+
+    <p id="status" role="status"></p>
+
+    <ul id="task-list" aria-label="Task list"></ul>
+    <p id="empty">No tasks yet. Add one above.</p>
+  </main>
+
+  <footer>
+    <p>Agent-Tools catalog &mdash; real-work sandbox</p>
+  </footer>
+
+  <script>
+    const API = 'http://localhost:3741';
+    const form = document.getElementById('task-form');
+    const input = document.getElementById('task-input');
+    const list = document.getElementById('task-list');
+    const status = document.getElementById('status');
+    const empty = document.getElementById('empty');
+
+    function setStatus(msg, isError = false) {
+      status.textContent = msg;
+      status.style.color = isError ? '#c00' : '#060';
+    }
+
+    function renderTask(task) {
+      const li = document.createElement('li');
+      li.textContent = task.text;
+      li.setAttribute('data-id', task.id);
+      list.appendChild(li);
+      empty.hidden = true;
+    }
+
+    async function loadTasks() {
+      try {
+        const res = await fetch(`${API}/tasks`);
+        if (!res.ok) throw new Error(`GET /tasks → ${res.status}`);
+        const { tasks } = await res.json();
+        list.innerHTML = '';
+        tasks.forEach(renderTask);
+        empty.hidden = tasks.length > 0;
+      } catch (err) {
+        setStatus(`Could not load tasks: ${err.message}`, true);
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) {
+        setStatus('Task cannot be empty.', true);
+        input.focus();
+        return;
+      }
+      try {
+        const res = await fetch(`${API}/tasks`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text }),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || `POST /tasks → ${res.status}`);
+        }
+        const { task } = await res.json();
+        renderTask(task);
+        input.value = '';
+        setStatus('Task added.', false);
+        input.focus();
+      } catch (err) {
+        setStatus(`Error: ${err.message}`, true);
+      }
+    });
+
+    loadTasks();
+  </script>
+</body>
+</html>

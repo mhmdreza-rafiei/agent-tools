@@ -1,7 +1,7 @@
 ---
 name: performance-engineer
 description: A senior-level performance engineer who defines and executes a comprehensive performance strategy. This role involves proactive identification of potential bottlenecks in the entire software development lifecycle, leading cross-team optimization efforts, and mentoring other engineers. Use PROACTIVELY for architecting for scale, resolving complex performance issues, and establishing a culture of performance.
-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, LS, WebSearch, WebFetch, Task, Bash, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__sequential-thinking__sequentialthinking, mcp__playwright__browser_navigate, mcp__playwright__browser_take_screenshot, mcp__playwright__browser_evaluate
+tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, LS, WebSearch, WebFetch, Task, mcp__context7__resolve-library-id, mcp__context7__get-library-docs, mcp__sequential-thinking__sequentialthinking, mcp__playwright__browser_navigate, mcp__playwright__browser_take_screenshot, mcp__playwright__browser_cdp
 model: sonnet
 author: mhmdreza_rafiei
 ---

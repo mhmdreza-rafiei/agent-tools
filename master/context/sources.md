@@ -39,7 +39,20 @@ Notes for `practices.md`. Retrieved August 2026. Do not treat blog roundups as R
 - TrueFoundry. "Spec-Driven Development for AI Agents: Governing Specs." https://www.truefoundry.com/blog/spec-driven-development-ai-agents — Spec Kit timeline (Specify → Plan → Tasks → Implement); standing-instruction budget (~150–200). Cross-check numbers against Spec Kit / Anthropic rather than this post alone.
 - Xingyao Wang et al. "Spec Kit Agents: Context-Grounded Agentic Workflows." arXiv:2604.05278. https://arxiv.org/pdf/2604.05278 — Pre/post phase grounding: probe the repo before generating; validate paths/deps; run tests after implement.
 
+## Incident response and root cause analysis
+
+- Google SRE Book. "Chapter 12: Effective Troubleshooting." https://sre.google/books/site-reliability-engineering/ — Root cause vs symptom; fix once at the source; add checks to prevent recurrence.
+- Atlassian. "Incident Management Guide." https://www.atlassian.com/incident-management — Bug triage, reproduction, and postmortem patterns.
+- Adam Savage / The Mythbusters Method. Common debugging pattern: reproduce, isolate, identify root cause, test fix, document.
+
+## Code review best practices
+
+- Google Code Review Guide. "How to do a code review." https://google.github.io/eng-practices/review/ — Reviewer mandate, what to focus on (correctness, design), what to skip (style, personal preference).
+- Nami Waddell, Ryan Dahl. "Code Review Guide: Automated static analysis, human review layers." https://deno.land/manual/tools/code_review — Role split: linter for style, human for logic/security/scope.
+- GitHub. "Code review best practices." https://github.blog/2018-09-17-code-review-tools-and-resources/ — Scope, test coverage, security gates as part of review.
+
 ## What we did not cite as evidence
 
 - Unsourced "I tested every agent for 7 days" listicles, unless a specific, checkable claim was needed — and even then we preferred METR/Faros/Anthropic/GitHub.
-- Fake or unnamed "studies." If a practice is folk wisdom (e.g. "paste the error"), it is labeled as practice, not research.
+- Fake or unnamed "studies." If a practice is folk wisdom (e.g. "reproduce the bug first"), it is labeled as practice, not research.
+- Single anecdotes ("at Company X we do Y") unless they appear in multiple independent sources or published case studies.

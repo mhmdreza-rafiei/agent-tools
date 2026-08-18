@@ -55,3 +55,11 @@ Then: plan (how, files, data), then tasks (ordered, parallel only when files do 
 ### 6. Git at the end, not in the middle
 
 Commit only with the user's stated preference. Conventional Commits. No secrets. No AI `Co-authored-by` trailers unless they asked.
+
+## Catalog load
+
+- Agents: `frontend/frontend-developer` and/or `backend/full-stack-developer` (stack as chosen); `backend/backend-architect` only if the first slice needs a schema/API shape.
+- Skills: `workflow/spec`, `workflow/scaffold`, `context/groundwork`.
+- Rules: `global/ask-dont-guess`, `global/ponytail`, `global/git-workflow`, `global/files-folders-structure`.
+- Profile: `starter` or `fullstack`.
+

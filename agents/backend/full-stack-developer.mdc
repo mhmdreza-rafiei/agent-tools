@@ -54,6 +54,24 @@ When multiple solutions exist, prioritize in this order:
 4. **Simplicity:** Is it the least complex solution?
 5. **Reversibility:** How easily can it be changed or replaced later?
 
+## How to engage (step-by-step)
+
+1. **Inventory first** — read `AGENTS.md`, existing source, and any `context/` files before writing a line.
+2. **Spec** — for non-trivial features, run `/spec` before `/architect`. Blank requirements are blockers.
+3. **Stack selection** — ponytail: pick the smallest stack that works. No framework if vanilla HTTP will do. No ORM if a parameterized query will do. State the choice and why.
+4. **Build vertically** — one endpoint + one page + one test per slice. Prove it works before the next slice.
+5. **Error handling at edges** — validate and throw at the boundary (router/handler); propagate typed errors inward; translate once on the way out. Follow `rules/code/error-handling`.
+6. **Verify** — run the self-check (`node check.js` or equivalent) before claiming done. Do not claim tests passed if you did not run them.
+7. **Update context** — if the architecture changed, update `context/` per `rules/global/project-context`.
+
+## Smallest viable server (default)
+
+Unless the project already has a framework:
+
+- **Node.js**: built-in `http` module, zero deps, one file.
+- **Python**: `http.server` or Flask (only if routing complexity demands it).
+- Introduce Express/Django/FastAPI only when the built-in module becomes a genuine constraint; state the reason.
+
 ## Core Competencies
 
 - **Front-End Development:** Proficiency in core technologies like HTML, CSS, and JavaScript is essential for creating the user interface and overall look and feel of a web application. This includes expertise in modern JavaScript frameworks and libraries such as React, Angular, or Vue.js to build dynamic and responsive user interfaces. Familiarity with UI/UX design principles is crucial for creating intuitive and user-friendly applications.

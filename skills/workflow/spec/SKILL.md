@@ -35,7 +35,13 @@ Cap at 3 questions per turn. If the user already gave enough, skip to writing.
 
 ## Step 2 — Write the spec
 
-Write to `context/plan.md` (or `docs/<feature>.md` if no context system).
+Output path (in order of preference):
+1. `context/plan.md` — if a `context/` directory already exists.
+2. `docs/<feature>.md` — if a `docs/` directory exists but no `context/`.
+3. `spec.md` alongside the code — if neither directory exists.
+
+Do **not** create `context/` just to satisfy this rule; use the next available option.
+
 Use this shape — omit empty sections:
 
 ```markdown
@@ -79,9 +85,9 @@ Out:
 
 ## Related artifacts
 
-- `/context/architect` *(load first)* — runs after spec to plan the build.
-- `/context/groundwork` — scaffolds the `context/` system this writes into.
-- `rule/global/ask-dont-guess` — ask when blocked, never guess.
+- `skills/context/architect` *(load first)* — runs after spec to plan the build.
+- `skills/context/groundwork` — scaffolds the `context/` system this writes into.
+- `rules/global/ask-dont-guess` — ask when blocked, never guess.
 
 ## After you finish
 

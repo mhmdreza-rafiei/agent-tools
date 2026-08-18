@@ -1,46 +1,49 @@
 # Checklist
 
-Humans fill `checklist.pdf`. You treat a filled copy as the contract. Skip only for pure research — still require Goal and Must-not.
+Humans fill `checklist.pdf`. You treat a filled copy as the contract. Use for all project workflows (new, inherited, debug, review). For pure research (Q&A, planning), still require Goal and Must-not.
 
-Copy this block into the prompt or into the project's `context/plan.md`. Blank lines are blockers.
+Copy this block into the prompt, a comment, or the project's `context/checklist.md`. **Blank lines below are blockers — ask to fill them.**
 
 ```text
 ## Goal
-- One sentence outcome:
-- User / beneficiary:
+- One sentence outcome (done when):
+- User / team / role benefiting:
 
-## Constraints
-- Must:
-- Must not:
-- Stack (only if already chosen):
-- Secrets / private surfaces the agent must not touch:
+## Constraints (non-negotiable)
+- Must (required for "done"):
+- Must not (no scope creep):
+- Stack (only if locked; leave blank if choosing):
+- Secrets / private surfaces agent must skip (URLs, keys, users):
 
-## Context already in the repo (paths)
-- Standing: AGENTS.md / README / rules:
-- Spec or issue:
-- Code to read first:
-- Examples of "good" in this repo:
+## Context already in the repo (paths and sources)
+- Standing file (AGENTS.md / README / rules / context/):
+- Spec or issue (link or paste):
+- Key code to read first (paths, max 5):
+- Examples of "good" in this repo (paths):
 
 ## Repo map (or "greenfield")
-- Production code lives in:
-- Tests live in:
-- Generated / vendor dirs to skip:
+- Production code location:
+- Tests location:
+- Generated / vendor / .gitignore paths:
+- Default branch:
 
-## Success checks (commands, not vibes)
-- [ ] <exact command>
-- [ ] <exact command>
+## Success checks (paste-able commands only; vibes don't count)
+- [ ] <exact command that passes when done>
+- [ ] <exact command that passes when done>
 
 ## Git
 - Repo exists? yes / no (if no: stop and confirm git init)
-- Allowed this session: commit / push / both / neither / unknown (ask)
-- Default branch:
+- Allowed this session: commit / push / both / neither / ask (if ask, you must ask before writing)
+- Who reviews merges? (name or "not yet"):
 ```
 
-## Ready-first, in order
+## Blocking order
 
-1. Goal — if it is not one sentence, do not generate.
-2. Must not — highest-ROI section. Agents expand scope.
-3. Context files — standing rules plus 3–10 files that matter.
-4. Repo map — do not invent a layout they do not have.
-5. Success checks — if there is no pasteable command, acceptance is still vague.
-6. Git permission — unknown means ask, then do not commit.
+1. **Goal** — one sentence, testable outcome. Stop if vague.
+2. **Must not** — highest leverage. Agents naturally expand scope; this is the fence.
+3. **Git permission** — unknown = ask, then read the permission before any write.
+4. **Context files** — point to 3–10 files the agent truly needs.
+5. **Repo map** — do not invent folder structure; ask if unclear.
+6. **Success checks** — if no pasteable command, acceptance is still a guess. Press them to be exact.
+
+For inherited projects, add a `Scope` field: e.g. "surgical change only, do not refactor other modules" or "onboarding: add context, do not change code."
