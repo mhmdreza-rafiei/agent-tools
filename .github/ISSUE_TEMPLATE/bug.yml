@@ -1,0 +1,22 @@
+name: Bug
+description: Something in the catalog, Master pack, or scripts is wrong
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Expected vs actual. Artifact path if relevant (agents/…, skills/…).
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduce
+      description: Commands, tag or commit, OS.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: Security issues go to Security → Advisories, not here.

@@ -1,0 +1,10 @@
+title: "[q] "
+labels: ["q-and-a"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: Install, Master pack, or how an artifact is supposed to work.
+    validations:
+      required: true

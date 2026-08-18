@@ -135,13 +135,13 @@ artifacts by `id`; scripts are folders with a `README.md` + runnable file.
   `product-manager`, `agent-organizer`. Incident command vs ops deep-dive:
   `devops/incident-responder` and `devops/devops-incident-responder`.
 - **skills/** — `context/` (10 context-system skills), `workflow/` (spec,
-  estimate, triage, release, scaffold, enhance-prompt-setup), `audit/` (a11y)
+  estimate, triage, release, scaffold, enhance-prompt-setup, github), `audit/` (a11y)
   + flat `enhance-prompt`.
 - **rules/** — `global/` (9 always-on rules: ask-dont-guess, files-folders-structure,
   git-workflow, migration, project-context, caveman, ponytail, ai-attribution,
   enhance-prompt-auto), `code/` (code-style, testing, error-handling, performance,
   accessibility) + flat domain rules (`security`, `api-design`, `observability`,
-  `prompt-quality`).
+  `prompt-quality`, `github`).
 - **scripts/** — `naming/`, `setup-enhance-prompt/`, catalog-maintenance scripts.
 - **master/** — default pack for anyone (not a per-person fork). Root = human
   PDFs (`start`, `checklist`, `roadmap`, `new`, `inherited`, `research`,

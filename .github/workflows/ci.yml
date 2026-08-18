@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+permissions:
+  contents: read
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: "22"
+
+      - run: node scripts/lint-artifacts/run.mjs
+      - run: node scripts/check-compat/run.mjs
+      - run: node scripts/validate-profiles/run.mjs
+      - run: node scripts/audit-catalog/run.mjs
+      - run: node docs/sandbox/demo/check.js

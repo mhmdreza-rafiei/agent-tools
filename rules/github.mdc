@@ -1,0 +1,29 @@
+---
+description: GitHub repo hygiene — security policy, CI, rulesets, Releases vs a releases/ folder — load when changing .github/ or community files
+alwaysApply: false
+author: mhmdreza_rafiei
+---
+
+# GitHub
+
+Applies when the change touches **`.github/`**, `SECURITY.md`, `CONTRIBUTING.md`,
+tags, or GitHub Releases. Not every chat.
+
+## Must
+
+- GitHub **Releases** come from `v*` tags + a workflow. A folder named
+  `releases/` is only a built artifact in the tree.
+- Pin Actions by commit SHA, not a floating major tag.
+- CI on pull requests and on the default branch. Read-only `contents`
+  unless the job publishes a Release (`contents: write` then).
+- `SECURITY.md` tells people to use private advisories, not public issues.
+- Tag ruleset: `v*` cannot be deleted, moved, or force-updated.
+- `main` cannot be deleted or force-pushed. Do not require approving
+  reviews unless the user asked (solo push to `main` is how this catalog ships).
+
+## Do not
+
+- Do not treat the `releases/` directory as a GitHub Release.
+- Do not enable "required reviews" on a one-person repo without asking.
+- Do not commit secrets, tokens, or `.env`.
+- Do not skip CI to land a catalog change (`lint-artifacts`, `check-compat`).

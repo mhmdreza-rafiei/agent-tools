@@ -1,0 +1,18 @@
+name: github
+description: GitHub repository setup — security policy, CI, Dependabot, rulesets, and the github skill.
+author: mhmdreza_rafiei
+scope: project
+targets:
+  agents:
+    - cursor
+    - claude-code
+artifacts:
+  skills:
+    - id: workflow/github
+    - id: workflow/release
+  rules:
+    - id: github
+    - id: git-workflow
+    - id: ai-attribution
+    - id: security
+    - id: ask-dont-guess

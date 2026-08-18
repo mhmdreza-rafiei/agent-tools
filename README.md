@@ -11,9 +11,9 @@ Works with Cursor, Claude Code, Codex, OpenCode, and 70+ more.
 [![stars](https://img.shields.io/github/stars/mhmdreza-rafiei/agent-tools?style=social)](https://github.com/mhmdreza-rafiei/agent-tools)
 [![agentry](https://img.shields.io/badge/agentry-compatible-38bdf8?style=flat)](https://github.com/mhmdreza-rafiei/agentry)
 [![agents](https://img.shields.io/badge/agents-46-38bdf8?style=flat)](agents)
-[![skills](https://img.shields.io/badge/skills-18-38bdf8?style=flat)](skills)
-[![rules](https://img.shields.io/badge/rules-18-38bdf8?style=flat)](rules)
-[![profiles](https://img.shields.io/badge/profiles-11-38bdf8?style=flat)](profiles)
+[![skills](https://img.shields.io/badge/skills-19-38bdf8?style=flat)](skills)
+[![rules](https://img.shields.io/badge/rules-19-38bdf8?style=flat)](rules)
+[![profiles](https://img.shields.io/badge/profiles-12-38bdf8?style=flat)](profiles)
 
 </div>
 
@@ -39,7 +39,7 @@ agentry add profile mhmdreza-rafiei/agent-tools fullstack
 
 ## What's in the catalog
 
-**107 artifacts** — 46 agents, 18 skills, 18 rules, 11 profiles, 14 scripts.
+**111 artifacts** — 46 agents, 19 skills, 19 rules, 12 profiles, 15 scripts.
 Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 
 ### Agents (46)
@@ -93,7 +93,7 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | (flat) | `product-manager` | Roadmaps, market analysis, business alignment |
 | (flat) | `agent-organizer` | Multi-agent team assembly, delegation strategy |
 
-### Skills (17)
+### Skills (19)
 
 | Category | Skill | Use for |
 |----------|-------|---------|
@@ -112,10 +112,12 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `workflow/` | `triage` | Sort an issue/bug list by severity + root-cause guess |
 | `workflow/` | `release` | Cut a release: changelog gen, version bump, tag, notes |
 | `workflow/` | `scaffold` | Scaffold a new feature with tests + types + docs stub |
+| `workflow/` | `enhance-prompt-setup` | Wire the enhance-prompt skill into a project |
+| `workflow/` | `github` | Set up GitHub security, CI, rulesets, releases, community files |
 | `audit/` | `a11y` | Accessibility audit: axe, keyboard, contrast, motion |
 | (flat) | `enhance-prompt` | Rewrite vague chat into precise, portable agent prompts |
 
-### Rules (17)
+### Rules (19)
 
 | Rule | Always apply | Use for |
 |------|--------------|---------|
@@ -127,6 +129,7 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `global/caveman` | yes | Terse responses with full technical substance |
 | `global/ponytail` | yes | Lazy senior dev mode: simplest solution that works |
 | `global/ai-attribution` | yes | AI git co-authorship: explain, prevent, remove safely |
+| `global/enhance-prompt-auto` | yes | Auto-enhance prompts before acting |
 | `code/code-style` | no | In-code style: formatting, naming, structure |
 | `code/testing` | no | Testing bar: what must be tested, coverage floors |
 | `code/error-handling` | no | Forbid silent catches; require typed errors + logging |
@@ -136,8 +139,9 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `api-design` | no | API design standards: versioning, pagination, error shape |
 | `observability` | no | Structured logs / spans / metrics on new endpoints |
 | `prompt-quality` | no | Prompt quality: clarity, scope, output format, must-nots |
+| `github` | no | GitHub repo hygiene: CI, rulesets, Releases, community files |
 
-### Profiles (9)
+### Profiles (12)
 
 | Profile | Bundles | One-line |
 |---------|---------|----------|
@@ -150,8 +154,11 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `security` | 4 agents + 3 rules | Security + API review team |
 | `qa` | 7 agents + 2 skills + 4 rules | Full QA team: review, API, a11y, test automation |
 | `context` | 13 skills + 2 rules | The full context-system + workflow suite |
+| `enhance-prompt` | 1 skill | Manual prompt-enhancement skill |
+| `enhance-prompt-auto` | 1 skill + 1 rule | Auto-enhance prompts before every action |
+| `github` | 2 skills + 5 rules | GitHub repo setup: security, CI, rulesets, releases |
 
-### Scripts (12)
+### Scripts (15)
 
 | Script | Use for |
 |--------|---------|
@@ -167,6 +174,9 @@ Every artifact carries `author: mhmdreza_rafiei` in its frontmatter.
 | `sync` | Thin wrapper around `agentry add` for installing the catalog |
 | `onboard` | Print a contributor onboarding guide |
 | `backup` | Bundle the catalog into a git bundle or tarball |
+| `setup-enhance-prompt` | Wire enhance-prompt into a project automatically |
+| `workbook` | Build human PDFs + master.zip for the master pack |
+| `github` | Apply `.github/rulesets` and enable private vulnerability reporting |
 
 ## Artifact layouts
 
@@ -231,6 +241,9 @@ node scripts/sync/run.mjs ../my-app      # install catalog into a target
 node scripts/onboard/run.mjs             # print contributor onboarding
 node scripts/backup/run.mjs              # bundle the catalog for restore
 node scripts/workbook/run.mjs            # human PDFs + pack master.zip
+node scripts/setup-enhance-prompt/run.mjs . --auto  # wire enhance-prompt into a project
+node scripts/github/run.mjs              # dry-run GitHub repo setup
+node scripts/github/run.mjs --apply      # apply rulesets + enable reporting (needs gh auth)
 ```
 
 ## Master (default pack, not an artifact)
